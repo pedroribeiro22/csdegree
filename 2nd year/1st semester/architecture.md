@@ -101,3 +101,19 @@ Now, consider the same code and repeat the exercise:
 | 2   |  ```addu $t1, $t0, $t2```   |   ```nop``` |
 | 3   |  ```addi $t5, $s4, 20```| ```nop``` |
 | CPI   | 3 / 4 = 0.75|
+
+## Vectorial Processing 
+
+When we're talking about Scalar Processing it's fairly simple to understand that each instruction processes a single element of the data structure.
+
+Now, when we consider Vectorial Processing it's a whole different scene. Each instruction processes ```n``` elements of the data structure.
+
+Lets take a look at the benefits of this processing method:
+
+* The number of instructions tends to be reduced by a fairly large amount due to fact that each instructions now takes care of ```n``` elements of the data structure.
+
+* The number of clock cycles per instruction usually increases because each functional unity performs ```n``` parallel operations which contributs to mantain the amount of clock cycles spent to conclude a single instruction.
+
+* The amount of data that has to be transfered per time unity also increases and as we already know, getting data from memory sucks up a lot of time.
+
+We're now looking at a process that deals with single instructions. On the other hand each instruction usues multiple data.
