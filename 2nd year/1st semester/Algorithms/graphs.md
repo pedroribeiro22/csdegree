@@ -16,7 +16,7 @@ In order to perform operations in graphs we have to define some data structures 
 
 In my perspective we can both store a graph as matrix in which the ```i``` index represents the origin vertex and the ```j``` index represents the destination vertex. With this information we can create the following structure:
 
-```
+```c
 #define N 6
 typedef int matrixGraph[N][N];
 ```
@@ -24,7 +24,7 @@ In case you haven't figured it out already this structure stores the weight of t
 
 We can take another route and use an array of linked lists as follows:
 
-```
+```c
 typedef struct edge {
     int dest;
     int cost;
@@ -38,7 +38,7 @@ typedef struct List listGraph[N];
 
 Lets convert a graph presented in the first data structure in a graph presented in the second structure:
 
-```
+```c
 void matrixToList(matrixGraph gOrigin, listGraph gDestination) {
   int i, j;
   struct edge tmp;
@@ -62,7 +62,7 @@ There are two major ways of crossing a graph a graph. The most reknown algorithm
 
 Lets start with Depth First crossing. In this one we have to keep an array of visited vertex in order to avoid going in circles in the case of the existence of closed circuits in the graph.
 
-```
+```c
 int depthFirst(listGraph g, int origin) {
   int visited[N];
   for(int i = 0; i < N; i++) visited[i] = 0;
@@ -82,7 +82,7 @@ int depthFirstRecursive(listGraph g, int origin, int visited[]) {
 
 We may want to keep track of we're coming from. In that case we have to make some subtle tweaks in this code in order to just that. We can create an array in which we store the previous vertex (in the first vertex, the origin, we can store ```-1``` once we know that number will never ocure since the vertex identifier is positive).
 
-```
+```c
 int dfFathers(listGraph g, int origin, int fathers[]) {
   int visited[N];
   for(int i = 0; i < N; i++) {
@@ -110,7 +110,7 @@ int dfFathersRec(listGraph g, int origin, int visited[], int fathers[]) {
 
 In order to accomplish this crossing I have to introduce the ideia of a priority queue. If you are not familiar with these kind of structure I strongly advise you to get in touch with it.
 
-```
+```c
 int breadthFirst(listGraph g, int origin) {
   int visited[N];
   int fringe[N];
@@ -141,7 +141,7 @@ int breadthFirst(listGraph g, int origin) {
 We are going to do something similar to what we have done in the Depth First crossing, we're going to keep track of were we are coming from.
 We are also going to do something that we haven't done above and you're going to notice that we don't actually need the visited array.
 
-```
+```c
 int bfFathers(listGraph g, int origin, int fathers[]) {
   int fringe[N];
   int start, end, i, v;
