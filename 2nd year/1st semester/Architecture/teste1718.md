@@ -42,7 +42,7 @@ Vejamos qual o tipo de dependências:
 
 Como temos que `i` diminui podemos calcular `d` do seguinte modo: `d = - (c^W - c^R)`.
 
-Assim: `d = - (i - (i+2)) = -2`
+Assim: `d = - (i - (i-2)) = -2`
 
 Como `d < 0` temos uma dependência do tipo WaR (Write after Read) que por si só não é um obstáculo à auto-vetorização.
 
