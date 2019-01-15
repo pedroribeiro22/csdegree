@@ -86,16 +86,18 @@ for(i = 1; i < S; i++) {
 }
 ```
 
-Como estamos perante um ciclo for temos de usar a diretiva `for` inerente ao OpenMP para podermos executar este código de forma paralela. No entanto, para que possamos fazer tal coisa precisamos que a variável `j` seja privada para cada thread atribuída à execução paralela. Precisamos de ter um `j` para cada thread para podermos iterar o ciclo sem que as threads se afetem mutuamente levando a um resultado indeterminado. Assim a versão adaptada do código seria:
+Como estamos perante um ciclo for temos de usar a diretiva `for` inerente ao OpenMP para podermos executar este código de forma paralela. No entanto, para que possamos fazer tal coisa precisamos que a variável `j` seja privada para cada thread atribuída à execução paralela. Precisamos de ter um `j` para cada thread para podermos iterar o ciclo sem que as threads se afetem mutuamente levando a um resultado indeterminado.
+Podemos também introduzir a clausula de schedule `dynamic` visto que a workload atribuída a cada chunk aumenta de iteração para iteração (o `j` aumenta pelo que tem de somar mais elementos).
+ Assim a versão adaptada do código seria:
 
 ```C
 #define S 1000000
 float a[S];
-int i, j;
-#pragma omp parallel for private(j)
+int i;
+#pragma omp parallel for schedule(dynamic)
 for(i = 1; i < S; i++) {
     a[i] = 0.;
-    for(j = 0; j < i; j++) {
+    for(int j = 0; j < i; j++) {
         a[i] += j;
     }
 }
