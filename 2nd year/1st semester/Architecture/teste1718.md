@@ -94,7 +94,7 @@ Podemos também introduzir a clausula de schedule `dynamic` visto que a workload
 #define S 1000000
 float a[S];
 int i;
-#pragma omp parallel for schedule(dynamic)
+#pragma omp parallel for schedule(guided)
 for(i = 1; i < S; i++) {
     a[i] = 0.;
     for(int j = 0; j < i; j++) {
