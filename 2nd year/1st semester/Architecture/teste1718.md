@@ -5,9 +5,9 @@
 Discuta a veracidade da afirmação abaixo, justificando a sua resposta:
 *"O ganho de desempenho obtido com a vetorização de código, relativamente à respectiva versão escalar, deve-se apenas à diminuição do número médio de ciclos por instrução (CPI)."*
 
-```
+
 A afirmação é evidentemente falsa. Com a introdução das instruções vetoriais, que atuam sobre um conjunto de dados de modo simultâneo, a complexidade das mesmas tende a aumentar. Não é difícil simpatizar com esta ideia na medida em que basta apenas pensar que é aplicada uma operação elementar a um conjunto de dados. Com estas ideias torna-se evidente que a vantagem da vetroização se encontra no facto de se diminuir de modo drástico o número de instruções, diminuição esta que compensa o aumento do CPI, de tal modo, que o tempo de execução tende a diminuir.
-```
+
 
 ## Exercício 2
 
