@@ -1,0 +1,3 @@
+--- LARGURA DE BANDA DE UM SINAL ---
+Largura de banda, B, de um sinal é a amplitude de menor intervalo espectral positivo que contém 90% da energia total
+do sinal (ou da sua potência média total, caso se trate de um sinal periódico).

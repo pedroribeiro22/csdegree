@@ -1,0 +1,50 @@
+O canal de transporte da da mensagem é constituído por 4 partes:
+
+	* Fonte
+	* Transdutor de Entrada
+	* Transdutor de Saída
+	* Destino
+
+O ruído, interferência e distorçãoa afetam o canal principalmente no canal de transmissão.
+
+Temos 3 possíveis sistemas de transmissão:
+
+	* Simplex (SX) - A transmissão efetua-se num só sentido.
+	* Half - Duplex (HDX) - Se a transmissão for possível nos dois sentidos mas não em simultâneo.
+	* Full - Duplex (FDX) - Se a transmissão for possível nos dois sentidos e em simultâneo.
+
+--- LIMITAÇÕES ---
+
+	* As limitações fundamentais à transmissão da informação por meios elétricos são a largura de banda e o ruído.
+	* As comunicações em condições de tempo real necessitam suficiente largura de banda de transmissão para comportar
+o espetro do sinal, caso contrário, o sinal sofrerá distorção. 
+	* O máximo ritmo de símbolos teórico obedece à seguinte formulação: Rs = 2 * Bt (símbolos/s) - designado por ritmo
+de Nyquist.
+	* No caso da transmissão sem limitações em tempo real, a largura de banda disponível determina a velocidade 
+máxima a que o sinal pode ser transmitido. O tempo necessário para transmitir uma dada quantidade de informação é,
+consequentemente, proporcional a Bt.
+	* O ruído impõe uma segunda limitação à transmissão de informação. A justificação para a inevitabilidade de ruído 
+é-nos dada pela teoria cinética das partículas. A temperaturas superiores a zero absoluto, a energia térmica faz com 
+que as partículas materiais microscópicas fiquem possuídas de movimento aleatório. O movimento aleatório das partículas
+carregadas eletricamente, tais como os eletrões, dá origem a correntes e tensões aleatórias designadas por ruído térmico.
+Existem outros tipos de ruído, mas o térmico aparece em todos os sistemas de comunicação.
+
+--- MODULAÇÃO E CODIFICAÇÃO ---
+
+	A modulação envolve duas formas de onda: o sinal modulante que representa a mensagem e onda portadora. Um modulador
+tem por função alterar sistematicamente a onda portadora de acordo com as variações da amplitude do sinal modulante. É 
+desta forma que a onda modulada resultante "transporta" a informação contida na mensagem. Em geral, pretende-se que a
+modulação seja uma operação reversível para que possa ser recuperada a onda modulante original no destino.
+
+Existem três principais variantes de modulação:
+
+	* ASK - Esta sigla corresponde a Amplitude Shifting Key, ou seja, modulação em amplitude. Esta forma de modulação é 
+a mais suscetível à ação do ruído.
+
+	* FSK - Esta sigla corresponde a Frequency Shifting Key, ou seja, modulação em frequência. Esta forma de modulação
+é mais imune ao ruído, uma vez que este afeta principalmente a amplitude da onda. No entanto, as ondas que resultam
+deste processo necessitam de uma maior largura de banda, relativamente a ASK.
+
+	* PSK - Esta sigla corresponde a Phase Shifting Key, ou seja, modulação em fase. Esta forma de modulação produz um 
+sinal com igual frequência, igual amplitude, mas consideravelmente mais imune ao ruído. Necessita de menor largura de 
+banda relativamente a FSK (Largura de banda equivalente a ASK).
