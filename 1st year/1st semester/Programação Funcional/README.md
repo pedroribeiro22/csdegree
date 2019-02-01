@@ -5,23 +5,7 @@
   </a>
 </h1>
 
-## Download
-```shell
-git clone https://github.com/pedroribeiro22/dotfiles ~/.dotfiles
-git clone https://github.com/nelsonmestevao/spells   ~/.spells
-cd ~/.dotfiles
-sh install.sh
-```
-
-## Uninstall
-
-```shell
-cd ~/.dotfiles
-sh uninstall.sh
-cd ~
-rm -rf ~/.dotfiles
-rm -rf ~/.spells
-```
-
-## Credits
-* [Nelson Estevão](https://github.com/nelsonmestevao)
+## Purpose
+Feel free to use every resources in this page, as long as it helps you I'm fine with it.
+This repository contains the work developed during the first semester of the first year of
+the Software Engineering degree on [University of Minho](https://www.uminho.pt/EN).
