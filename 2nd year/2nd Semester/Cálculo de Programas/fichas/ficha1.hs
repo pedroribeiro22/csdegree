@@ -54,8 +54,8 @@ myFmap f (Fork (e, d)) = Fork (myFmap f e, myFmap f d)
 newLength :: [a] -> Int
 newLength = foldr (\ _ n -> 1 + n) 0
 
-newReverse :: [a] -> [a]
-newReverse l = foldr (:) [] l
+cenas :: [a] -> [a]
+cenas l = foldr (:) [] l
 
 -- 7 --
 myConcat :: [[a]] -> [a]
