@@ -70,11 +70,13 @@ function l = foldr f [] l
                | True = ac
 
 -- 9 --
-{-
+-- a --
 funcaoExemplo :: (a -> b) -> [a] -> [b]
 funcaoExemplo f [] = []
 funcaoExemplo f (h:t) = f h : funcaoExemplo f t
 
-funcaoExemploFoldr :: (a -> b) -> [a] -> [b]
-funcaoExemploFoldr f l = foldr f [] l
--}
+-- Não estou a ver --
+
+-- b --
+funcaoExemploNew :: (a -> b) -> [a] -> [b]
+funcaoExemploNew f l = map f l
