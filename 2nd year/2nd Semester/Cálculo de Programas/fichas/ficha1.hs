@@ -65,7 +65,7 @@ myFmap f (Fork (e, d)) = Fork (myFmap f e, myFmap f d)
 
 -- Exercício 6 --
 newLength :: [a] -> Int
-newLength = foldr (\ _ n -> 1 + n) 0
+newLength = foldr (\l acc -> 1 + acc) 0
 
 cenas :: [a] -> [a]
 cenas l = foldr (:) [] l
