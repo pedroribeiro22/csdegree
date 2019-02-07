@@ -1,50 +1,58 @@
 module Ficha1 where
 
--- Length function using a *foldl*
--- increment :: Int -> Int
--- increment x = x+1
+-- 2 --
+--a--
+myLength :: [a] -> Int
+myLength [] = 0
+myLength (h:t) = 1 + myLength t
 
--- myLength :: [a] -> Int
--- myLength (x:xs) = foldl (increment) 0 xs
+--b--
+myReverse :: [a] -> [a]
+myReverse [h] = [h]
+myReverse l = [last l] ++ myReverse (init l)
 
--- catMaybes
+-- 3 --
 catMaybes :: [Maybe a] -> [a]
 catMaybes [] = []
 catMaybes (Nothing : xs) = catMaybes xs
-catMaybes (Just a : xs) = a : catMaybes xs
+catMaybes (Just b : xs) = b : catMaybes xs
 
--- uncurry
-myUncurry :: (a->b->c) -> (a,b) -> c
-myUncurry f (a,b) = f a b
+-- 4 --
+-- a --
+myUncurry :: (a -> b -> c) -> (a, b) -> c
+myUncurry f (x,y) = f x y
 
--- curry
-myCurry :: ((a,b) -> c) -> a -> b -> c
-myCurry f a b = f (a, b)
+-- b --
+myCurry :: ((a, b) -> c) -> a -> b -> c
+myCurry f x y = f (x, y)
 
--- flip
-myFlip :: (a->b->c) -> (b->a->c)
-myFlip f a b = f b a
+-- c --
+myFlip :: (a -> b -> c) -> b -> a -> c
+myFlip f x y = f y x
 
--- LTrees
+-- 5 --
 data LTree a = Leaf a
-              | Fork (LTree a, LTree a)
-              deriving Show
+             | Fork (LTree a, LTree a)
 
+
+-- a --
 flatten :: LTree a -> [a]
-flatten (Leaf a) = [a]
-flatten (Fork (a, b)) = flatten a ++ flatten b
+flatten (Leaf b) = [b]
+flatten (Fork (e, d)) = flatten e ++ flatten d
 
+-- b --
 mirror :: LTree a -> LTree a
-mirror (Leaf a) = Leaf a
-mirror (Fork (a, b)) = Fork (mirror a, mirror b)
+mirror (Leaf b) = Leaf b
+mirror (Fork (e, d)) = Fork (mirror d, mirror e)
 
-treeMap :: (b->a) -> LTree b -> LTree a
-treeMap f (Leaf x) = Leaf (f x)
-treeMap f (Fork (x, y)) = Fork (treeMap f x, treeMap f y)
+-- c --
+myFmap :: (b -> a) -> LTree b -> LTree a
+myFmap f (Leaf i) = Leaf (f i)
+myFmap f (Fork (e, d)) = Fork (myFmap f e, myFmap f d)
 
--- concat
-myConcat :: [[a]] -> [a]
-myConcat [] = []
-myConcat (x:xs) = x ++ myConcat xs
+-- 6 --
+newLength :: [a] -> Int
+newLength = foldr (\ _ n -> 1 + n) 0
 
-
+newReverse :: [a] -> [a]
+newReverse l = foldr (:) [] l
