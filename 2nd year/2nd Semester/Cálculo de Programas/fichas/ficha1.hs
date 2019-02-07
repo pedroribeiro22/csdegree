@@ -88,7 +88,8 @@ funcaoExemplo :: (a -> b) -> [a] -> [b]
 funcaoExemplo f [] = []
 funcaoExemplo f (h:t) = f h : funcaoExemplo f t
 
--- Não estou a ver --
+fr :: (a -> b) -> [a] -> [b]
+fr f = foldr (\x acc -> f x : acc) []
 
 -- b --
 funcaoExemploNew :: (a -> b) -> [a] -> [b]
