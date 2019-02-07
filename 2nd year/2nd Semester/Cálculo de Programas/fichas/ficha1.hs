@@ -22,6 +22,7 @@ myLength (h:t) = 1 + myLength t
 
 myDecentLength :: [a] -> Int
 myDecentLength = foldl (const . succ) 0
+
 --b--
 myReverse :: [a] -> [a]
 myReverse [h] = [h]
