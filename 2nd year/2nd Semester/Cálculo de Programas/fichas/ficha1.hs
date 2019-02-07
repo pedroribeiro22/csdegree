@@ -1,6 +1,19 @@
 module Ficha1 where
 
--- 2 --
+-- Exercício 1 --
+-- a --
+{-
+1º caso
+(f . g) x = f (g x) = f (x + 1) = 2 * (x + 1) = 2 * x + 2 * 1 = 2x + 2
+2º caso
+(f . g) x = f (g x) = f (2 * x) = succ (2x) = 2x + 1
+3º caso
+(f . g) x = f (g x) = succ (length) = length + 1
+4º caso
+(f . g) x y = f (g(x, y)) = f (x + y) = succ . (*2) (x + y) = (*2) (x + y + 1) = 2x + 2y + 2
+-}
+
+-- Exercício 2 --
 --a--
 myLength :: [a] -> Int
 myLength [] = 0
@@ -11,13 +24,13 @@ myReverse :: [a] -> [a]
 myReverse [h] = [h]
 myReverse l = [last l] ++ myReverse (init l)
 
--- 3 --
+-- Exercício 3 --
 catMaybes :: [Maybe a] -> [a]
 catMaybes [] = []
 catMaybes (Nothing : xs) = catMaybes xs
 catMaybes (Just b : xs) = b : catMaybes xs
 
--- 4 --
+-- Exercício 4 --
 -- a --
 myUncurry :: (a -> b -> c) -> (a, b) -> c
 myUncurry f (x,y) = f x y
@@ -30,7 +43,7 @@ myCurry f x y = f (x, y)
 myFlip :: (a -> b -> c) -> b -> a -> c
 myFlip f x y = f y x
 
--- 5 --
+-- Exercício 5 --
 data LTree a = Leaf a
              | Fork (LTree a, LTree a)
 
@@ -50,26 +63,26 @@ myFmap :: (b -> a) -> LTree b -> LTree a
 myFmap f (Leaf i) = Leaf (f i)
 myFmap f (Fork (e, d)) = Fork (myFmap f e, myFmap f d)
 
--- 6 --
+-- Exercício 6 --
 newLength :: [a] -> Int
 newLength = foldr (\ _ n -> 1 + n) 0
 
 cenas :: [a] -> [a]
 cenas l = foldr (:) [] l
 
--- 7 --
+-- Exercício 7 --
 myConcat :: [[a]] -> [a]
 myConcat [] = []
 myConcat (h:t) = h ++ myConcat t
 
--- 8 --
+-- Exercício 8 --
 function :: [Int] -> [Int]
 function l = foldr f [] l
       where
         f x ac | x > 0 = (x+1) : ac
                | True = ac
 
--- 9 --
+-- Exercício 9 --
 -- a --
 funcaoExemplo :: (a -> b) -> [a] -> [b]
 funcaoExemplo f [] = []
