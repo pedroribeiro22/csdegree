@@ -56,3 +56,25 @@ newLength = foldr (\ _ n -> 1 + n) 0
 
 newReverse :: [a] -> [a]
 newReverse l = foldr (:) [] l
+
+-- 7 --
+myConcat :: [[a]] -> [a]
+myConcat [] = []
+myConcat (h:t) = h ++ myConcat t
+
+-- 8 --
+function :: [Int] -> [Int]
+function l = foldr f [] l
+      where
+        f x ac | x > 0 = (x+1) : ac
+               | True = ac
+
+-- 9 --
+{-
+funcaoExemplo :: (a -> b) -> [a] -> [b]
+funcaoExemplo f [] = []
+funcaoExemplo f (h:t) = f h : funcaoExemplo f t
+
+funcaoExemploFoldr :: (a -> b) -> [a] -> [b]
+funcaoExemploFoldr f l = foldr f [] l
+-}
