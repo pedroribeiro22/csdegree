@@ -1,11 +1,8 @@
-```
 <h1 align="center">
   <a target="_blank" href="">
     <img src="https://image.flaticon.com/icons/png/512/39/39385.png" alt="cpu" height="200px" width="300px">
   </a>
 </h1>
-```
-
 
 
 ### 1.1  What Operating Systems Do
