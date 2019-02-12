@@ -4,6 +4,8 @@
 #include "person.h"
 
 int main() {
+
+    // Na função destroy_person não precisamos de fazer free(p) porque a estrutura não é alocada dinamicamente. Caso fosse alocada dinamicamente também teríamos de fazer free.
     Person andre = new_person("Andre", 20);
 
     printf("Idade anterior André %d\n", andre.age);

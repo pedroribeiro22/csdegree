@@ -1,7 +1,7 @@
 CC         = gcc
 CFLAGS     = -std=c11 -O2 -Wall -Wextra -pedantic -g
 OBJS       = $(patsubst %.c,%.o,$(wildcard $(SRCDIR)*.c))
-SRCDIR     = src/
+SRCDIR     = ./
 PROGRAM    = guide0
 
 $(PROGRAM): $(OBJS)
