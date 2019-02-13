@@ -4,28 +4,27 @@ import java.util.Date;
 public class Main {
 
     public static void main(String[] args) {
-        Main m = new Main();
         switch(args[0]) {
-            case "1": m.executeConversion();
+            case "1": executeConversion();
                       break;
-            case "2": m.executeMaximoNumeros();
+            case "2": executeMaximoNumeros();
                       break;
-            case "3": m.executeDescricao();
+            case "3": executeDescricao();
                       break;
-            case "4": m.executeMoneyConversion();
+            case "4": executeMoneyConversion();
                       break;
-            case "5": m.executeReadNWrite();
+            case "5": executeReadNWrite();
                       break;
-            case "6": m.executeFactorial();
+            case "6": executeFactorial();
                       break;
-            case "7": m.executeTempoGasto();
+            case "7": executeTempoGasto();
                       break;
             default : break;
         }
     }
 
     // Função que executa celsiusToFarenheit
-    public void executeConversion() {
+    public static void executeConversion() {
         Ficha1 f = new Ficha1();
         System.out.println("Introduza o valor (em Celsius) que pretende converter para Farenheit.");
         Scanner scan = new Scanner(System.in);
@@ -35,7 +34,7 @@ public class Main {
     }
 
     // Função que executa maximoNumeros
-    public void executeMaximoNumeros() {
+    public static void executeMaximoNumeros() {
         Ficha1 f = new Ficha1();
         System.out.println("Introduza o primeiro inteiro que pretende comparar.");
         Scanner scan = new Scanner(System.in);
@@ -48,7 +47,7 @@ public class Main {
     }
 
     // Função que executa criaDescriçãoConta
-    public void executeDescricao() {
+    public static void executeDescricao() {
         Ficha1 f = new Ficha1();
         System.out.println("Introduza o seu nome.");
         Scanner scan = new Scanner(System.in);
@@ -61,7 +60,7 @@ public class Main {
     }
 
     // Funçao que executa conversao de euros para libras
-    public void executeMoneyConversion() {
+    public static void executeMoneyConversion() {
         Ficha1 f = new Ficha1();
         // vamos criar uma taxa de conversão ficticia
         double taxaConversao = 1.232323;
@@ -73,14 +72,14 @@ public class Main {
     }
 
     // Funcao que aplica readnwrite
-    public void executeReadNWrite() {
+    public static void executeReadNWrite() {
         Ficha1 f = new Ficha1();
         double mean = f.readnwrite();
         System.out.println("A média dos números introduzidos é: " + mean);
     }
 
     // Função que executa factorial
-    public void executeFactorial() {
+    public static void executeFactorial() {
         Ficha1 f = new Ficha1();
         System.out.println("Introduza o número cujo fatorial pretende saber.");
         Scanner scan = new Scanner(System.in);
@@ -90,7 +89,7 @@ public class Main {
     }
 
     // Função que executa tempoGasto
-    public void executeTempoGasto() {
+    public static void executeTempoGasto() {
         Ficha1 f = new Ficha1();
         System.out.println("Esta função calcula o fatorial de 5000 e de seguida diz-lhe o tempo que demorou a realizar essa mesma operação (em segundos).");
         long tempo = f.tempoGasto();
