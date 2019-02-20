@@ -6,10 +6,10 @@ public class Ficha2 {
     // Exercício 1
     // a
     public int min(int[] arr) {
-        int min = 10000;
+        int min = Integer.MAX_VALUE;
         for(int d : arr) if(d < min) min = d;
         return min;
-    } 
+    }
 
     // b
     public int[] arrayEntre(int[] array, int i, int f) {
@@ -20,14 +20,14 @@ public class Ficha2 {
     }
 
     //c
-    public int[] comuns(int[] arr1, int[] arr2) {
+    public int[] comuns(int[] arr, int[] arr2) {
         int length = (arr.length > arr2.length) ? arr.length : arr2.length;
         int[] newArr = new int[length];
         int index = 0;
         for(int i = 0; i < arr.length; i++)
             for(int j = 0; j < arr2.length; j++)
                 if(arr2[j] == arr[i]) newArr[index++] = arr[i]; index++;
-        return newArray;
+        return newArr;
     }
 
     // Exercício 2
@@ -46,7 +46,7 @@ public class Ficha2 {
         for(int i = 0; i < 5; i++)
             sum += notasTurma[aluno][i];
         mean = sum / 5;
-        return mean; 
+        return mean;
     }
 
     //d
@@ -58,7 +58,7 @@ public class Ficha2 {
 
     //e
     public int highestGrade(int[][] notasTurma) {
-        int max = -1;
+        int max = Integer.MIN_VALUE;
         for(int i = 0; i < 5; i++)
             for(int j = 0; j < 5; j++)
                 if(notasTurma[i][j] > max) max = notasTurma[i][j];
@@ -67,7 +67,7 @@ public class Ficha2 {
 
     //f
     public int lowestGrade(int[][] notasTurma) {
-        int min = 21;
+        int min = Integer.MAX_VALUE;
         for(int i = 0; i < 5; i++)
             for(int j = 0; j < 5; j++)
                 if(notasTurma[i][j] < min) min = notasTurma[i][j];
@@ -87,14 +87,15 @@ public class Ficha2 {
     }
 
     //h
-    public String grades(int[][] notasTurma) {
-        String outp = "";
-        for(int i = 0; i < 5; i++)
-            for(int j = 0; j < 5; j++) {
-                outp = outp + i + "-> " + j + "; ";
-            }
-        outp += "\n";
-    }
+    // public String grades(int[][] notasTurma) {
+    //     String outp = "";
+    //     for(int i = 0; i < 5; i++) {
+    //         for(int j = 0; j < 5; j++) {
+    //             outp = outp + i + "-> " + j + "; ";
+    //         }
+    //     }
+    //     outp += "\n";
+    // }
 
     //i
     public int highestMeanUC(int[][] notasTurma) {
