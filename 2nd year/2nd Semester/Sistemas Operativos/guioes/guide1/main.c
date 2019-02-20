@@ -59,7 +59,7 @@ void myCatBytesVariable(int bytes) {
 /* Exercício 5 */
 ssize_t readln(int fildes, void *buf, size_t nbyte) {
     ssize_t res;
-    for(int i = 0; i < nbyte && res > 0; ){
+    for(int i = 0; i < nbyte && res > 0;){
         res += read(fildes, buf + 1, 1);
         if(((char*) buf)[i] == '\n') return i;
         i+=res;
