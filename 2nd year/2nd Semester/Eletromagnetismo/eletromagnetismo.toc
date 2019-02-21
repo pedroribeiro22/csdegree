@@ -1,0 +1,15 @@
+\babel@toc {portuguese}{}
+\contentsline {section}{\numberline {1}Introdu\IeC {\c c}\IeC {\~a}o}{2}% 
+\contentsline {section}{\numberline {2}Cargas El\IeC {\'e}tricas}{2}% 
+\contentsline {subsection}{\numberline {2.1}Cargas El\IeC {\'e}tricas}{2}% 
+\contentsline {subsection}{\numberline {2.2}Condutores e Isoladores}{2}% 
+\contentsline {subsection}{\numberline {2.3}Lei de Coloumb}{3}% 
+\contentsline {subsection}{\numberline {2.4}A Carga \IeC {\'e} Quantizada}{3}% 
+\contentsline {subsection}{\numberline {2.5}A Carga \IeC {\'e} Conservada}{4}% 
+\contentsline {section}{\numberline {3}Campos El\IeC {\'e}tricos}{4}% 
+\contentsline {subsection}{\numberline {3.1}O Campo El\IeC {\'e}trico}{4}% 
+\contentsline {subsection}{\numberline {3.2}Linhas de Campo El\IeC {\'e}trico}{4}% 
+\contentsline {subsection}{\numberline {3.3}Campo El\IeC {\'e}trico Produzido por uma Carga Pontual}{5}% 
+\contentsline {section}{\numberline {4}Lei de Gauss}{5}% 
+\contentsline {subsection}{\numberline {4.1}Fluxo}{5}% 
+\contentsline {subsection}{\numberline {4.2}Fluxo de um Campo El\IeC {\'e}trico}{6}% 

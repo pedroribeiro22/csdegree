@@ -39,7 +39,7 @@ em que \(\vec{r}\) é um vetor unitário na direção da reta que liga as duas p
 Por motivos históricos (e também para simplificar outras equações), a constante eletrostática \textit{k} é escrita na forma \(\frac{1}{4 \pi \epsilon}\). Nesse caso, o módulo da força de Coloumb é:
 \newline
 % Corrigir (para a forma real)
-\[ \vec{F} = k \frac{q_1 q_2}{r^2} \vec{r}\]
+\[ \vec{F} = \frac{1}{4 \pi \epsilon} \frac{\abs{|q_1|} \abs{|q_2|}}{r^2} \vec{r}\]
 \newline
 \subsection{A Carga é Quantizada}
 Todas as cargas positivas e negativas \textit{q} são da forma:
@@ -72,7 +72,31 @@ A relação entre as linhas de campo e os vetores de campo elétrico é a seguin
 \end{itemize}
 Assim, \textit{E} tem valores elevados nas regiões em que as linhas de campo estão mais próximas e valores pequenos nas regiões em que as linhas de campo estão mais afastadas.
 \subsection{Campo Elétrico Produzido por uma Carga Pontual}
-Para determinarmos o campo elétrico produzido a uma distância \textit{r} de uma carga pontual \textit{q}, colocamos uma carga de prova \textit{$q_0$} nesse ponto. De acordo com a lei de Coloumb, o módulo da força eletrostática que age sobre \textit{$q_0$} é dado por
+Para determinarmos o campo elétrico produzido a uma distância \textit{r} de uma carga pontual \textit{q}, colocamos uma carga de prova \textit{$q_0$} nesse ponto. De acordo com a lei de Coloumb, o módulo da força eletrostática que age sobre \textit{$q_0$} é dado por:
+\newline
+\[\vec{F} = \frac{1}{4\pi\epsilon} \frac{{q}{q_0}}{r^2} \vec{r}\]
+\newline
+A direção de \(\vec{F}\) é contrária à carga pontual caso esta seja positiva e na direção da mesma caso esta seja negativa. O vetor campo elétrico é dado por:
+\newline
+\[\vec{E} = \frac{\vec{F}}{q_0} = \frac{1}{4\pi\epsilon} \frac{q}{r^2} \vec{r}\]
+\section{Lei de Gauss}
+\subsection{Fluxo}
+Suponhamos que uma espira quadrada de área A é exposta a um vento uniforme cuja velocidade é \(\vec{v}\). Seja \(\Phi\) o fluxo (volume por unidade de tempo) do ar através da espira. Esse fluxo depende do ângulo entre \(\vec{v}\) e o plano da espira. Se \(\vec{v}\) é perpendicular ao plano da espira, o fluxo \(\Phi\) é igual a vA.
+Se \(\vec{v}\) é paralela ao plano da espira, o ar não passa pela espira e, portanto, \(\Phi\) é zero. Para um ângulo intermediário \(\theta\), o fluxo \(\Phi\) depende da componente de \(\vec{v}\) normal ao plano. Como essa componente é \(v \cos \theta\), o fluxo através da espira é dado por:
+\newline
+\[\Phi = (v \cos \theta) A\]
+\newline
+Precisamos de escrever a equação anterior na forma vetorial. Para isso, definimos um vetor área \(\vec{A}\) como um vetor cujo módulo é igual à área de uma superfície plana e cuja direção é perpendicular a essa superfície. Isto permite-nos escrever a equação como o produto escalar do vetor velocidade do vento \(\vec{v}\) pelo vetor área da espira \(\vec{A}\):
+\newline
+\[\Phi = v A \cos \theta = \vec{v} \vec{A}\]
+\newline
+em que \(\theta\) é o ângulo entre \(\vec{v}\) e \(\vec{A}\).
+\subsection{Fluxo de um Campo Elétrico}
+Consideremos um superfície gaussiana arbitrária (assimétrica) imersa num campo elétrico não uniforme. Vamos dividir a superfície em quadrados de área \(\Delta A\) suficientemente pequenos para que a curvatura local da superfície possa ser desprezada e os quadrados possam ser considerados planos. Estes elementos de área podem ser representados por vetores \(\Delta A\) cujo módulo é a área \(\Delta A\). Todos os vetores \(\Delta A\) são perpendiculares à superfície gaussiana e apontam para força da superfície.
+Como os quadrados são arbitrariamente pequenos, o campo elétrico \(\vec{E}\) pode ser considerado constante no interior de cada quadrado; assim, para cada quadrado, os vetores \(\Delta \vec{A}\) e \(\vec{E}\) fazem um certo ângulo \(\theta\).
+Segue a seguinte definição provisória do fluxo do campo elétrico para a superfície gaussiana é a seguinte:
+\[\Phi = \sum{\vec{E}{\Delta \vec{A}}}\]
+
 \end{document}
 
 
