@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class Ficha2 {
 
@@ -109,6 +110,21 @@ public class Ficha2 {
         return index;
     }
 
+    // Exercício 3
+    // a (Não quero criar o programa, vamos assumir que recebe o array como argumento)
+    public void insereData(LocalDate data, LocalDate[] lista, int occupied) {
+        if(occupied < lista.length) lista[occupied++] = data;
+    }
+
+    //b
+    public String arrayToString(LocalDate[] lista) {
+        String output = "";
+        for(int i = 0; i < lista.length; i++) {
+            output.concat(lista[i].toString());
+        }
+        return output;
+    }
+
     // Exercício 4
     //a
     public void sortArray(int[] lista) {
@@ -158,4 +174,3 @@ public class Ficha2 {
         return oposta;
     }
 }
-
