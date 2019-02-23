@@ -1,15 +1,18 @@
+#include <fcntl.h>
 #include <stdio.h>
 #include <unistd.h>
-#include <fcntl.h>
 
-ssize_t readln(int fildes, void* buf, ssize_t nbyte) {
-    ssize_t res;
-    int i = 0;
-    while(i < nbyte && (res += read(fildes, buf + i, 1) > 0)) {
-      if(((char *) buf)[i] == '\n') {
-        return i;
-      }
-      i += res;
+ssize_t readln(int fildes, void* buf, size_t nbyte)
+{
+    ssize_t size = 0;
+    char c;
+    char* buff = (char*)buf;
+    while (size < nbyte && read(fildes, &c, 1) == 1) {
+        if (c == '\0')
+            return size;
+        buff[size++] = c;
+        if (c == '\n')
+            return size;
     }
-    return -1;
+    return size;
 }
