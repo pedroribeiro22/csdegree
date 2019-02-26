@@ -8,8 +8,6 @@ ssize_t readln(int fildes, void* buf, size_t nbyte)
     char c;
     char* buff = (char*)buf;
     while (size < nbyte && read(fildes, &c, 1) == 1) {
-        if (c == '\0')
-            return size;
         buff[size++] = c;
         if (c == '\n')
             return size;
