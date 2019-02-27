@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/wait.h>
+#include "guide2.h"
 
 int main() {
     pid_t pai, filho;

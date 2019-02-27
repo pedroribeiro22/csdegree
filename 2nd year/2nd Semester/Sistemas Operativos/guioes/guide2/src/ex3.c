@@ -1,15 +1,16 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/wait.h>
+#include "guide2.h"
 
-int main() {
-    pid_t id;
+int main(int argc, char **argv) {
+    
     for(int i = 0; i < 10; i++) {
-        if((id = fork()) == 0) {
-            printf("O filho é %d e o pai é %d.\n", getpid(), getppid());
-        } else {
-            wait(&id);
+        if(!fork()) {
+            printf("PID(L1): %d\nPID(L0): %d\n", getpid(), getppid());
+            _exit(i);
         }
+        int pid, status;
+        pid = wait(&status);
+        status = WEXITSTATUS(status);
+        printf("O filho é %d terminou com o código %d\n", pid, status);
     }
     return 0;
 }
