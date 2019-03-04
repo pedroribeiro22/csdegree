@@ -1,5 +1,3 @@
-import java.lang.Math;
-
 public class Circulo {
 
     private double x;
@@ -9,83 +7,64 @@ public class Circulo {
     public Circulo() {
         this.x = 0;
         this.y = 0;
-        this.raio = 1;
+        this.raio = 0;
     }
 
-
-    // Retorna coordenada x
     public double getX() {
-        return this.x;
+        return x;
     }
 
-    // Retorna coordenada y
     public double getY() {
-        return this.y;
+        return y;
     }
 
-    // Retorna o raio
     public double getRaio() {
-        return this.raio;
+        return raio;
     }
 
-    // Altera o valor de x
     public void setX(double x) {
         this.x = x;
     }
 
-    // Altera o valor de x
     public void setY(double y) {
         this.y = y;
     }
 
-    public Circulo(Circulo g) {
-        this.x = g.getX();
-        this.y = g.getY();
-        this.raio = g.getRaio();
-    }
-
-    // Altera o valor do raio
     public void setRaio(double raio) {
         this.raio = raio;
     }
 
-    // Altero o centro
+    public Circulo(double x, double y, double raio) {
+        this.x = x;
+        this.y = y;
+        this.raio = raio;
+    }
+
     public void alteraCentro(double x, double y) {
-        setX(x);
-        setY(y);
+        this.setX(x);
+        this.setY(y);
     }
 
-    // Calcula a área
     public double calculaArea() {
-        double area;
-        area = Math.PI * Math.pow(raio, 2);
-        return area;
+        return(Math.PI * Math.pow(this.getRaio(), 2));
     }
 
-    public double perimetro() {
-        return Math.PI * raio * 2;
+    public double calculaPerimetro() {
+        return(2 * Math.PI * this.getRaio());
     }
 
-    // Clonar um círculo
-    public Circulo clone() {
-        return new Circulo(this);
+    public boolean equals(Object o) {
+        if(o == this) return true;
+        if((o == null) || o.getClass() != this.getClass()) return false;
+        Circulo c = (Circulo) o;
+        return (this.x == c.getX());
     }
 
     public String toString() {
-        return "X = " + x + "; Y =" + y + "; RAIO = " + raio;
+        return "Centro: " + "(" + this.x + " ," + this.y + ")" + "\n Raio: " + this.raio;
     }
 
-    // Comparação de objetos
-    public boolean equals(Object o) {
-
-        if(o == this) return true;
-
-        if((o == null) || (this.getClass() != o.getClass())) return false;
-
-        Circulo c = (Circulo) o;
-        if(c.getX() == this.getX() && c.getY() == this.getY() && c.getRaio() == this.getRaio())
-            return true;
-
-        return false;
+    public Circulo clone() {
+        return new Circulo(this.getX(), this.getY(), this.getRaio());
     }
 }
