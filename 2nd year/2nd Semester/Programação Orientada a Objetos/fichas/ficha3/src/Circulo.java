@@ -39,10 +39,9 @@ public class Circulo {
     }
 
     public Circulo(Circulo g) {
-        Circulo novo = new Circulo();
-        novo.setX(g.getX());
-        novo.setY(g.getY());
-        novo.setRaio(g.getRaio());
+        this.x = g.getX();
+        this.y = g.getY();
+        this.raio = g.getRaio();
     }
 
     // Altera o valor do raio
