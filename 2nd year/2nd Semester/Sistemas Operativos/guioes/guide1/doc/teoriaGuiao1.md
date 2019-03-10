@@ -12,6 +12,6 @@
     * Guarda o modo de abertura e posição de leitura/escrita de cada descritor
 
 ## Bibliotecas
-    * ```C <unistd.h>``` (definições e declarações de chamadas)
-    * ```C <fcntl.h> ``` (definição modos de abertura de ficheiro)
+    * `<unistd.h>` (definições e declarações de chamadas)
+    * `C <fcntl.h>` (definição modos de abertura de ficheiro)
     * O_RDONLY; O_WRONLY; O_CREAT; O_*;
