@@ -7,6 +7,7 @@
  */
 public class LinhaEncomenda
 {
+
     private String referencia;
     private String descricao;
     private double preco;
@@ -128,5 +129,5 @@ public class LinhaEncomenda
         //..
         return sb.toString();
     }            
-    
+
 }
