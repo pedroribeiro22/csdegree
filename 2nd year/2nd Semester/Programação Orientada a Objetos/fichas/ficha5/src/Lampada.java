@@ -3,7 +3,8 @@ import java.time.LocalDate;
 public class Lampada {
 
     private int estado;
-    private double consumo;
+    private double totalConsumo;
+    private double atualConsumo;
     private LocalDate turnedOn;
 
     private static final int DESLIGADO = 0;
@@ -16,7 +17,8 @@ public class Lampada {
      */
     public Lampada() {
         this.estado = DESLIGADO;
-        this.consumo = 0;
+        this.totalConsumo = 0;
+        this.atualConsumo = 0;
         this.turnedOn = null;
     }
 
@@ -26,21 +28,24 @@ public class Lampada {
      */
     public Lampada(int estado) {
         this.estado = estado;
-        this.consumo = 0;
-        if(estado)
-            this.turnedOn = LocalDateTime.now();
+        this.totalConsumo = 0;
+        this.atualConsumo = 0;
+        if(estado != 0)
+            this.turnedOn = LocalDate.now();
         else this.turnedOn = null;
     }
 
     /**
-     * Construtor com o parâmetro `cosumo`
+     * Construtor com o parâmetro `consumo`
      * @param consumo Consumo a iniciar na criação da lâmpada
      */
-    public Lampada(double consumo) {
+    public Lampada(double totalConsumo) {
         this.estado = DESLIGADO;
-        this.consumo = consumo;
+        this.totalConsumo = totalConsumo;
+        this.atualConsumo = 0;
         this.turnedOn = null;
     }
+
 
     /**
      * Construtor com o parâmetro `instante em que se ligou a lâmpada`
@@ -48,7 +53,8 @@ public class Lampada {
      */
     public Lampada(LocalDate turnedOn) {
         this.estado = DESLIGADO;
-        this.consumo = 0;
+        this.totalConsumo = 0;
+        this.atualConsumo = 0;
         this.turnedOn = turnedOn;
     }
 
@@ -57,15 +63,23 @@ public class Lampada {
      * @return Estado da lâmpada
      */
     public int getEstado() {
-        this.estado;
+        return this.estado;
     }
 
     /**
      * Método que permite obter o consumo da lâmpada
      * @return Consumo da lâmpada
      */
-    public double getConsumo() {
-        return this.consumo;
+    public double getTotalConsumo() {
+        return this.totalConsumo;
+    }
+
+    /**
+     * Método que permite obter o consumo atual da lâmpada
+     * @return Consumo atual da lâmpada
+     */
+    public double getAtualConsumo() {
+        return this.atualConsumo;
     }
 
     /**
@@ -88,9 +102,15 @@ public class Lampada {
      * Método que permite definir o consumo da lâmpada
      * @param consumo Consumo da lâmpada
      */
-    public void setConsumo(double consumo) {
-        this.consumo = consumo;
+    public void setTotalConsumo(double totalConsumo) {
+        this.totalConsumo = totalConsumo;
     }
+
+    /**
+     * Método que permite definir o consumo atual da lâmpada
+     * @param atualConsumo Consumo atual
+     */
+    public void setAtualConsumo(double atualConsumo) {this.atualConsumo = atualConsumo;}
 
     /**
      * Método que permite definir o instante em que uma lâmpada foi ligada
@@ -105,14 +125,15 @@ public class Lampada {
      * @param object Objeto a comparar
      * @return True caso sejam iguais ou False caso contrário
      */
-    @override
+    @Override
     public boolean equals(Object object) {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         if (!super.equals(object)) return false;
         Lampada lampada = (Lampada) object;
         return  estado == lampada.estado &&
-                Double.compare(lampada.consumo, consumo) == 0 &&
+                Double.compare(lampada.totalConsumo, this.totalConsumo) == 0 &&
+                Double.compare(lampada.atualConsumo, this.atualConsumo) == 0 &&
                 turnedOn.equals(lampada.turnedOn);
     }
 
@@ -120,12 +141,56 @@ public class Lampada {
      * Método que permite imprimir o objeto lâmpada
      * @return String que demonstra o objeto
      */
-    @override
+    @Override
     public String toString() {
         return "Lampada{" +
-                "estado=" + estado +
-                ", consumo=" + consumo +
+                "estado=" + this.estado +
+                ", totalConsumo=" + this.totalConsumo +
+                ", atualConsumo=" + this.atualConsumo +
                 ", turnedOn=" + turnedOn +
                 '}';
+    }
+
+    /**
+     * Método que permite fazer `reset` ao contador dd consumo atual
+     */
+    public void reset() {
+        this.atualConsumo = 0;
+    }
+    /**
+     * Método que permite alterar o estado da lâmpada para `LIGADO`
+     */
+    public void lampON() {
+        this.setEstado(LIGADO);
+    }
+
+    /**
+     * Método que permite alterar o estado da lâmpada para `DESLIGADO`
+     */
+    public void lampOFF() {
+        this.setEstado(DESLIGADO);
+    }
+
+    /**
+     * Método que permite alterar o estado da lâmpada para `ECO`
+     */
+    public void lampECO() {
+        this.setEstado(ECO);
+    }
+
+    /**
+     * Método que permite obter o consumo total de uma lâmpada
+     * @return Consumo total da lâmpada
+     */
+    public double totalConsumo() {
+        return this.getTotalConsumo();
+    }
+
+    /**
+     * Método que permite obter o consumo de uma lâmpada (após o último reset)
+     * @return O consumo da uma lâmpada (após o último reset)
+     */
+    public double periodoConsumo() {
+        return this.getAtualConsumo();
     }
 }
