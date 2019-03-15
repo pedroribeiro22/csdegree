@@ -1,22 +1,59 @@
 import java.util.List;
+import java.util.ArrayList;
 
 public class Stack {
 
    private List<String> stack;
 
+   /**
+    * Construtor vazio
+    */
    public Stack() {
       this.stack = new ArrayList<>();
    }
 
+   /**
+    * Construtor parametrizado
+    * @param stack Lista contendo os elementos da stack
+    */
    public Stack(List<String> stack) {
-      // this.stack = stack; -> errado
-      setStack(stack);
+      for(String s : stack)
+         this.stack.add(s);
    }
 
+   /**
+    * Construtor parametrizado
+    * @param stack Stack exemplo
+    */
    public Stack(Stack stack) {
       this.stack = stack.getStack();
    }
 
+   /**
+    * Método que permite obter a stack
+    * @return Stack
+    */
+   public List<String> getStack() {
+      List<String> res = new ArrayList<>();
+      stack.stream().forEach(e -> {res.add(e);});
+      return res;
+   }
+
+   /**
+    * Método que permite definir uma stack
+    * @param stack Stack
+    */
+   public void setStack(List <String> stack) {
+      this.stack = new ArrayList<>();
+      for(String s : stack)
+         this.stack.add(s);
+   }
+
+   /**
+    * Método que permite comparar dois objetos do tipo `Stack`
+    * @param o Objeto a comparar
+    * @return True caso sejam iguais ou False caso contrário
+    */
    public boolean equals(Object o) {
       if(o == this) return true;
       if(o == null || o.getClass() != this.getClass()) return false;
@@ -24,25 +61,14 @@ public class Stack {
       return this.stack.equals(s.getStack());
    }
 
+   /**
+    * Método que fornece uma representação textual da classe `Stack`
+    * @return Representação textual da classe `Stack`
+    */
    public String toString() {
       return this.stack.toString();
    }
 
-   public int hashCode() {
-      return Objects.hash(super.hashCode(), getStack());
-   }
-
-   public void setStack(List <String> stack) {
-      this.stack = new ArrayList<>();
-      for(String s : stack)
-         this.stack.add(s);
-   }
-
-   public List<String> getStack() {
-       List<String> res = new ArrayList<>();
-       stack.stream().forEach(e -> {res.add(e);});
-       return res;
-   }
 
    /**
     * Devolve o elemento no topo da stack
@@ -56,7 +82,7 @@ public class Stack {
    }
 
    /**
-    * @param s String adicionar
+    * @param s String a adicionar
     */
    void push(String s) {
       this.stack.add(0, s);
