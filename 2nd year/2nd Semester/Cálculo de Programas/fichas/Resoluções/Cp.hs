@@ -1,4 +1,4 @@
-module CP where
+module Cp where
 
 infix 5  ><
 infix 4  -|-
