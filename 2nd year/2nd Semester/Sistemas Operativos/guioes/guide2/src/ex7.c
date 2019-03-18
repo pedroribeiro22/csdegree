@@ -1,4 +1,6 @@
 #include "guide2.h"
+
+// praticamente igual ao 7, só muda na parte de esperar pelos processos
 #define COLUNAS 100
 #define LINHAS 10
 
@@ -26,16 +28,13 @@ int main(int argc, char **argv) {
             _exit(0);
         }
     }
+    int i = 0; // vai servir para coordenar a espera
     pid_t pid;
     int status;
-    while((pid = wait(&status)) != -1) {
-        int i;
-        // temos de fazer um pequeno ciclo para descobrir a linha do processo que acabou
-        for(i = 0; i < LINHAS && pid != childs[i]; i++);
-        // temos agora a linha do processo que acabou
-        // vamos descobrir que valor retornou ao pai quando acabou
-        // caso tenha retornado `1` encontrou o `alvo`, caso contrário retornou `0`
-        if(WEXITSTATUS(status)) printf("O processo %d encontrou o alvo na linha %d\n", pid, i);
+    while(i < LINHAS) {
+        waitpid(childs[i], &status, 1);
+        if(WEXITSTATUS(status)) printf("O processo %d encontrou o alvo na linha %d\n", childs[i], i);
+        i++;
     }
     return 0;
 }

@@ -8,7 +8,5 @@
 #include <string.h>
 #include <time.h>
 
-#define COLUNAS 2000
-#define LINHAS 10
 
 #endif

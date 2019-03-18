@@ -2,9 +2,8 @@
 
 int main() {
     
-    pid_t pid;
 
-    if((pid = fork()) == 0) {
+    if(!fork()) {
         // processo filho
         printf("Este é o processo filho: L1\nIdentificador do processo: %d\nIdentificador do processo pai: %d\n", getpid(), getppid());
     } else {
