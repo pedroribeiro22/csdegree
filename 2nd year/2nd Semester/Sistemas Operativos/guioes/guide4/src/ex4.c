@@ -1,17 +1,23 @@
 #include "guide4.h"
 
-void ex1() {
-    int fd = open("/etc/passwd", O_RDONLY);
-    int fdSaida = open("saida.txt", O_CREAT | O_TRUNC | O_WRONLY, 00700);
-    int fdErros = open("erros.txt", O_CREAT | O_TRUNC | O_WRONLY, 00700);
-    dup2(fd, 0);
-    close(fd);
-    dup2(fdSaida, 1);
-    close(fdSaida);
-    dup2(fdErros, 2);
-    close(fdErros);
-}
-
 int main(int argc, char **argv) {
-
+    int fd;
+    for(int i = 1; argv[i]; i++)
+        if(argv[i][0] == '-') {
+            switch(argv[i][1]) {
+                case 'i':
+                    fd = open(argv[i++], O_RDONLY);
+                    dup2(fd, 0);
+                    close(fd);
+                    break;
+                case 'o':
+                    fd = open(argv[i++], O_CREAT | O_WRONLY | O_TRUNC);
+                    dup2(fd, 1);
+                    close(fd);
+                    break;
+            }
+        } else {
+            execvp(argv[i], argv + i);
+        }
+    return 0;
 }
