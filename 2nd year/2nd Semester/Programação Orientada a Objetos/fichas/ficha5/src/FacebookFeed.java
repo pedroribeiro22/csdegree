@@ -1,9 +1,12 @@
+package src;
+
 import java.util.List;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
 
 public class FacebookFeed {
 
-    private List<Post> feed;
+    private List<FBPost> feed;
 
     /**
      * Construtor não parametrizado
@@ -15,7 +18,7 @@ public class FacebookFeed {
     /**
      * Construtor parametrizado
      */
-    public FacebookFeed(List<Post> posts) {
+    public FacebookFeed(List<FBPost> posts) {
         this.setFeed(posts);
     }
 
@@ -23,8 +26,8 @@ public class FacebookFeed {
      * Método que permite obter a lista de posts correspondente ao feed
      * @return Lista de posts correspondentes ao feed
      */
-    public List<Post> getFacebookFeed() {
-        List<Post> res = new ArrayList<>();
+    public List<FBPost> getFacebookFeed() {
+        List<FBPost> res = new ArrayList<>();
         feed.stream().forEach(e -> {res.add(e);});
         return res;
     }
@@ -33,16 +36,16 @@ public class FacebookFeed {
      * Método que permite definir um feed a partir de uma lista de posts
      * @param posts Lista dep posts
      */
-    public void setFeed(List<Post> posts) {
-        for(Post s : posts)
-            this.feed.add(s);
+    public void setFeed(List<FBPost> posts) {
+        for(FBPost s : posts)
+            this.feed.add(s.clone());
     }
 
     /**
      * Método que permite adicionar um post ao feed
      * @param s
      */
-    public void add(Post s) {
+    public void add(FBPost s) {
         this.feed.add(s);
     }
 
@@ -51,7 +54,6 @@ public class FacebookFeed {
      * @param object Objeto a comparar
      * @return True caso sejam iguais ou False caso contrário
      */
-    @Override
     public boolean equals(Object object) {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
@@ -77,9 +79,7 @@ public class FacebookFeed {
      */
     @Override
     public FacebookFeed clone() {
-        FacebookFeed novo = new FacebookFeed();
-        for(Post s : this.feed)
-            novo.add(s.clone());
+        FacebookFeed novo = new FacebookFeed(this.getPosts());
         return novo;
     }
 
@@ -97,22 +97,37 @@ public class FacebookFeed {
      * @param user Nome de usuário
      * @return Lista de posts correspondetes ao usuário
      */
-    public List<Post> postsOf(String user) {
-        List<Post> novo = new ArrayList<>();
+    public List<FBPost> postsOf(String user) {
+        List<FBPost> novo = new ArrayList<>();
         this.feed.stream().filter(um -> user.equals(um.getUsername())).forEach(e -> {novo.add(e);});
         return novo;
     }
-
+    
     /**
-     * Método que permite determinar o post que tem o número identificador passado como argumento
-     * @param id Número identificador do post
-     * @return Post com o número identificador passado como argumento
+     * 
      */
-    public Post getPost(int id) {
-        Post novo = new Post();
-        for(int i = 0; i < this.feed.size(); i++)
-            if(id == this.feed.get(i).getPostID()) novo = new Post(this.feed.get(i).getUsername(), this.feed.get(i).getContent());
+    public List<FBPost> postsOf(String user, LocalDateTime inicio, LocalDateTime fim) {
+        List<FBPost> novo = new ArrayList<>();
+        this.feed.stream().filter(um -> um.getData().isAfter(inicio) &&
+                                  um.getData().isBefore(fim) &&
+                                  um.getUsername().equals(user)).forEach(e -> {novo.add(e);});
         return novo;
+    }
+   
+    
+    public FBPost getPost(int id) {
+        return  this.feed.stream().filter(p -> p.getId() == id)
+                                   .findFirst().get().clone();
+    }
+   // utilizar o metodo acima mas sem o clone() e faze-la private
+    // Nao existe minimo encapsulamento
+    // Para existir tenho de remover o FBPost e voltar a mete-lo no feed
+    public void comment(FBPost post, String comentario) {
+        int id = feef.indexOf(post);
+        FBPost p = this.feed.get(ind);
+        List<String> cms = p.getComentarios();
+        cms.add(comentario);
+        p.setComentarios(cms);
     }
 }
 

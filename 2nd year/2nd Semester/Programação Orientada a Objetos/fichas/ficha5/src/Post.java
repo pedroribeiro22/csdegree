@@ -1,4 +1,6 @@
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Post {
 
@@ -11,7 +13,7 @@ public class Post {
     private LocalDateTime creation;
     private String content;
     private int likeCount;
-    private String[] comments;
+    private List<String> comments;
 
     /**
      * Construtor não parametrizada
@@ -22,7 +24,7 @@ public class Post {
         this.setCreation(LocalDateTime.now());
         this.setContent("");
         this.setLikeCount(0);
-        this.setComments(new String[0]);
+        this.setComments(null);
         Post.postCounter++;
     }
 
@@ -37,7 +39,7 @@ public class Post {
         this.setCreation(LocalDateTime.now());
         this.setContent(content);
         this.setLikeCount(0);
-        this.setComments(new String[0]);
+        this.setComments(null);
         Post.postCounter++;
     }
 
@@ -85,8 +87,12 @@ public class Post {
      * Método que permite obter a lista de comentários associados a um post
      * @return Lista de comentários associados a um post
      */
-    public String[] getComments() {
-        return this.comments;
+    public ArrayList<String> getComments() {
+        ArrayList<String> novo = new ArrayList<>();
+        for(String s : this.comments) {
+            novo.add(s);
+        }
+        return novo;
     }
 
     /**
@@ -133,8 +139,10 @@ public class Post {
      * Método que permite definir a lista de comentários de um post
      * @param argComments Lista de comentários de um post
      */
-    public void setComments(String[] argComments) {
-        this.comments = argComments.clone();
+    public void setComments(ArrayList<String> argComments) {
+       for(String s : argComments) {
+           this.comments.add(s);
+       }
     }
 
     /**
@@ -142,19 +150,20 @@ public class Post {
      * @param object Objeto a comparar
      * @return True caso sejam iguais ou False caso contrário
      */
-    @Override
     public boolean equals(Object object) {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         if (!super.equals(object)) return false;
         Post post = (Post) object;
-        return  postID == post.postID &&
-                likeCount == post.likeCount &&
+        return postID == post.postID &&
+                likeCount == post.likeCount &
                 java.util.Objects.equals(username, post.username) &&
                 java.util.Objects.equals(creation, post.creation) &&
                 java.util.Objects.equals(content, post.content) &&
-                java.util.Arrays.equals(comments, post.comments);
+                java.util.Objects.equals(comments, post.comments);
     }
+
+
 
     /**
      * Método que fornece uma representação textual dos objetos do tipo `post`
@@ -168,7 +177,7 @@ public class Post {
                 ", creation=" + creation +
                 ", content='" + content + '\'' +
                 ", likeCount=" + likeCount +
-                ", comments=" + java.util.Arrays.toString(comments) +
+                ", comments=" + comments +
                 '}';
     }
 
@@ -184,7 +193,9 @@ public class Post {
         novo.creation = this.getCreationDate();
         novo.content = this.getContent();
         novo.likeCount = this.getLikeCount();
-        novo.comments = this.getComments().clone();
+        for(String s : this.getComments()) {
+            novo.comments.add(s);
+        }
         return novo;
     }
 }
