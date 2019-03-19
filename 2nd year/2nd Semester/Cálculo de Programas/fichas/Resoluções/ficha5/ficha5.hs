@@ -17,3 +17,6 @@ myMap f = cataList (either nil (g3 f))
 
 -- d --
 myListMax = cataList (either zero (uncurry max))
+
+-- Funcao `vezes`
+vezes x = cataNat (either (zero) (\y -> y + x))
