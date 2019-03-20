@@ -82,3 +82,8 @@ data Contacto = Casa Integer
 type Nome = String
 type Agenda = [(Nome, [Contacto])]
 
+-- a
+acrescEmail :: Nome -> String -> Agenda -> Agenda
+acrescEmail nome email [] = []
+acrescEmail nome email ((name, concs) : xs) | nome == name = (name, concs ++ [Email email]) : acrescEmail nome email xs
+                                            | otherwise = (name, concs) : acrescEmail nome email xs
