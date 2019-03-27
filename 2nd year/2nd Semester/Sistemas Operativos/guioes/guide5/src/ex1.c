@@ -3,7 +3,7 @@
 int filho2pai() {
     int fds[2];
     int status;
-    char texto[] = "És um boi!";
+    char texto[] = "U guys wanted to party!!!!";
     char leitura[1024];
     if(pipe(fds) == -1) return -1;
     switch(fork()) {
