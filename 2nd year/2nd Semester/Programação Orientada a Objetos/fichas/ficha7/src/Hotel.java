@@ -1,6 +1,6 @@
 public class Hotel {
 
-    private int id;
+    private String id;
     private String nome;
     private String localidade;
     private int stars;
@@ -29,7 +29,7 @@ public class Hotel {
         this.roomPrice = roomPrice;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -65,7 +65,7 @@ public class Hotel {
         return price;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -127,5 +127,9 @@ public class Hotel {
                 ", availableRooms=" + availableRooms +
                 ", roomPrice=" + roomPrice +
                 '}';
+    }
+
+    public Hotel clone() {
+        return new Hotel(this);
     }
 }
