@@ -20,9 +20,9 @@ public class HotelStandard extends Hotel {
     }
 
 
-    public double getPreco() {
-        int preco = super.getPreco();
-        if(epocaAlta) preco += 20;
+    public float getPreco() {
+        float preco = super.getRoomPrice();
+        if (epocaAlta == true) preco += 20;
         return preco;
     }
 

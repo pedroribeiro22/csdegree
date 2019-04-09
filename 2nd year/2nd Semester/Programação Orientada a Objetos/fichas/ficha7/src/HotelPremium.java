@@ -5,7 +5,7 @@ public class HotePremium extends Hotel {
     public HotelPremium() {
         super();
         this.taxaLuxo = 2;
-        super.setRoomPrice(2 * super.getRoomPrice());
+        this.setRoomPrice(2 * super.getRoomPrice());
     }
 
     public HotelPremium(float taxaLuxo) {
