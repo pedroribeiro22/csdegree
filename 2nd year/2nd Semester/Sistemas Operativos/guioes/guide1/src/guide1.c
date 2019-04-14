@@ -1,4 +1,11 @@
 #include "guide1.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <string.h>
+
+#define TENMB 1024 * 1024
 
 static void populateBuffer(char *buffer, int nbyte) {
     for(int i = 0; i < nbyte; i++)
