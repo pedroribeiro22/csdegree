@@ -2,6 +2,9 @@ import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
+import java.util.TreeSet;
+import java.util.Comparator;
+import java.uitl.Iterator;
 
 public class HoteisInc {
 
@@ -9,8 +12,18 @@ public class HoteisInc {
      * Variáveis de instância
      */
     private String nomeCadeia;
-    private Map<String, Hotel> hoteis;
+    private TreeSet<Hotel> hoteis;
 
+    private static Map<String, Comparator<Hotel>> comparators;
+
+    static {
+        comparators = new HashMap<>();
+        comparators.put("numQuartos", new ComparatorNumQuartos());
+    }
+
+    public static getComparator(String nome) {
+        return HoteisInc.comparators.get(nome);
+    }
     /**
      * Permite obter o nome da cadeia de hoteis
      * @return String com o nome da cadeia de hóteis
@@ -32,16 +45,20 @@ public class HoteisInc {
      * (Don't really know what this woulb de useful for)
      * @return Correspondência entre códigos e hóteis
      */
-    public Map<String, Hotel> getHoteis() {
-        return hoteis;
+    public Set<Hotel> getHoteis() {
+        Set<Hotel> ret = new TreeSet<>(nome);
+        for(Hotel l : hoteis) {
+            ret.add(l);
+        }
+        return ret;
     }
 
     /**
      * Permite definir o Map entre chaves e hóteis
      * @param hoteis Map entre chaves e hóteis
      */
-    public void setHoteis(Map<String, Hotel> hoteis) {
-        this.hoteis = hoteis;
+    public void setHoteis(TreeSet<Hotel> hoteis) {
+        this.hoteis = hoteis.clone();
     }
 
     /**
@@ -49,8 +66,8 @@ public class HoteisInc {
      * @param cod Chave que identifica o hotel
      * @return 'True' caso o hotel exista ou 'False' caso contrário
      */
-    public boolean existeHotel(String cod) {
-        return this.hoteis.containsKey(cod);
+    public boolean existeHotel(String nome) {
+        return this.hoteis.contains(nome);
     }
 
     /**
@@ -67,7 +84,11 @@ public class HoteisInc {
      * @return Número de hoteis que existem numa determinada localidade
      */
     public int quantos(String localidade) {
-        return (int) this.hoteis.values().stream().filter(h -> h.getLocalidade().equals(localidade)).count();
+        int ret = 0;
+        for(Hotel l : this.hoteis) {
+            quantos++;
+        }
+        return quantos;
     }
 
     /**
@@ -75,8 +96,11 @@ public class HoteisInc {
      * @param cod Código de correspondência ao hotel
      * @return Hotel corresponde à chave
      */
-    public Hotel getHotel(String cod) {
-        return this.hoteis.get(cod).clone();
+    public Hotel getHotel(String nome) {
+        Hotel ret = null;
+        for(Hotel l : this.getHoteis())
+            if(l.getNome().equals(nome)) ret = l.clone();
+        return ret;
     }
 
     /**
@@ -84,7 +108,7 @@ public class HoteisInc {
      * @param t Hotel a adicionar
      */
     public void adiciona(Hotel t) {
-        this.hoteis.put(t.getId(), t.clone());
+        this.hoteis.add(t.clone());
     }
 
     /**
@@ -94,6 +118,9 @@ public class HoteisInc {
     public List<Hotel> getHoteisList() {
         List<Hotel> ret = new ArrayList<>();
         this.hoteis.values().stream().map(p -> ret.add(p.clone()));
+        for(Hotel l : this.getHoteis()) {
+            ret.add(l.clone());
+        }
         return ret;
     }
 
@@ -101,8 +128,27 @@ public class HoteisInc {
      * Permite adicionar um Set de hoteis
      * @param hs Set de hoteis a adicionar
      */
-    public void adiciona(Set<Hotel> hs) {
-        for(Hotel h : hs)
-          this.adiciona(h);
+    public TreeSet<Hotel> ordenaHoteis() {
+        TreeSet<Hotel> r = new TreeSet<>();
+        for(Hotel l : this.hoteis.values())
+            r.add(l.clone());
+        return r;
     }
+
+    public TreeSet<Hotel> ordenarHoteis(Comparator<Hotel> c) {
+        TreeSet<Hotel> r = new TreeSet<>(c);
+        for(Hotel l : this.hoteis.values())
+            r.add(l.clone());
+        return r;
+    }
+
+    public Iterator<Hotel> ordenaHoteis(String criterio) {
+        Comparator<Hotel> c = HoteisInc.getComparator(criterio);
+        TreeSet<Hotel> res = ordenaHoteis(c);
+        return res.iterator();
+    }
+
+
 }
+
+

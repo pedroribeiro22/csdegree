@@ -1,4 +1,4 @@
-public class Hotel {
+public abstract class Hotel implements Comparable<Hotel> {
 
     /**
      * Variáveis de instância
@@ -199,7 +199,12 @@ public class Hotel {
      * Permite criar uma cópia de um objeto do tipo Hotel
      * @return Cópia criada
      */
-    public Hotel clone() {
-        return new Hotel(this);
+
+    public abstract Hotel clone();
+
+    public abstract float precoNoite();
+
+    public int compareTo(Hotel hotel) {
+        return this.nome.compareTo(hotel.getNome());
     }
 }
