@@ -2,7 +2,7 @@
 
 module List  where
 
-import Cp
+import CP
 import Nat
 
 -- (1) Datatype definition -----------------------------------------------------

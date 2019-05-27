@@ -4,7 +4,7 @@
 
 module Nat where
 
-import Cp
+import CP
 
 -- (1) Datatype definition -----------------------------------------------------
 
