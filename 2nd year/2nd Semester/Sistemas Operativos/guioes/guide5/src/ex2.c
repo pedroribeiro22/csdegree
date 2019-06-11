@@ -2,7 +2,6 @@
 
 int readCoisas() {
     char buff[BUFSIZ];
-    int i = 0;
     int fds[2];
     int r;
     int status;
