@@ -3,51 +3,37 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/wait.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 void get_email(char *email, char *linha) {
-    // copiar a parte do número de aluno
     for(int i = 0; i < 6; i++)
         email[i] = linha[i];
-
-    // adicionar a parte '@alunos.uminho.pt'
     sprintf(email + 6, "%s", "@alunos.uminho.pt");
 }
 
 int main(int argc, char **argv) {
-    // File descryptor
-    int fd;
-
-    // Vamos manter o número de programas concorrentes
-    // Não pode exceder 10
+    char *buf = malloc(sizeof(char) * 10);
+    char *email = malloc(sizeof(char) * 100);
+    int fd = open(argv[1], O_RDONLY, 0666);
     int concorrentes = 0;
-    int commPipe[2];
-    char *readBuffer = malloc(sizeof(char) * 12);
-    char *email = malloc(sizeof(char) * 50);
-
-
-    // Caso acho ficheiro abrimos
-    if((fd = open(argv[1], O_RDONLY, 0666)) == -1) return -1;
-
-    // O exercício propriamente dito
-    while(read(fd, readBuffer, 10)) {
+    int paipe[2];
+    pipe(paipe);
+    while((read(fd, buf, 10)) > 0) {
         if(concorrentes == 10) {
             wait(NULL);
             concorrentes--;
         }
-
-        pipe(commPipe);
-        write(commPipe[1], readBuffer, 10);
-        close(commPipe[0]);
-
+        write(paipe[1], buf, 10);
+        close(paipe[0]);
         if(fork() == 0) {
-            close(commPipe[1]);
-            dup2(commPipe[0], 0);
-            close(commPipe[0]);
-            get_email(email, readBuffer);
-            execlp("ls", "ls", NULL);
+            close(paipe[1]);
+            dup2(paipe[0], 0);
+            close(paipe[0]);
+            get_email(email, buf);
+            execlp("mail", "-s", "Sistemas_Operativos", email);
         }
-        close(commPipe[1]);
+        close(paipe[1]);
         concorrentes++;
     }
-    return 0;
 }
