@@ -1,18 +1,16 @@
 public class Incrementador implements Runnable {
 
     private Counter c;
+    private int i;
 
-    public Incrementador(Counter c) {
+    public Incrementador(Counter c, int i) {
         this.c = c;
+        this.i = i;
     }
 
     public void run() {
-
-        int i = 5;
-
-        for(int j = 0; j < 5; j++) {
+        for(int k = 0; k < this.i; k++)
             this.c.increment();
-        }
-
     }
+
 }
