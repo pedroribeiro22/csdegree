@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>pt.uminho.dss</groupId>
-    <artifactId>guiao3</artifactId>
+    <artifactId>guiao2cont</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
