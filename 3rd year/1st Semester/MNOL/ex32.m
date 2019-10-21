@@ -1,0 +1,1 @@
+format short% Variável independentex = [1 3 5 7 20]% Variável Dependentef = [800 2310 3090 3940 8000]% Para fazer o polinómio que se ajusta aos pontos% Só utiliza os pontos entre os índice (2-1) e (5-1)p3 = polyfit(x(2:5), f(2:5), 3)% Calcula o valor do polinómio para x = 10val = polyval(p3, 10)
