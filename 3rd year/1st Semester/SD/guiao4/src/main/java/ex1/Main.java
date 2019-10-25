@@ -1,4 +1,4 @@
-import ex1.BoundedBuffer;
+package ex1;
 
 public class Main {
 
@@ -45,8 +45,8 @@ public class Main {
             for(int i = 0; i < 20; i++) {
                 try {
 
-                   r = cbf.get();
-                   System.out.println("Got: " + r);
+                    r = cbf.get();
+                    System.out.println("Got: " + r);
                 }
                 catch(Exception e) {
                 }
@@ -78,5 +78,7 @@ public class Main {
             catch(Exception e) {
             }
         }
+        
     }
+
 }

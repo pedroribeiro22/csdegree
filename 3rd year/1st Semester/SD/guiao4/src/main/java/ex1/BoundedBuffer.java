@@ -1,3 +1,5 @@
+package ex1;
+
 public class BoundedBuffer {
 
     private final int[] buff;
