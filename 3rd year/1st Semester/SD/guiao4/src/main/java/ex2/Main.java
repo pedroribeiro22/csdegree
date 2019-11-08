@@ -1,144 +1,88 @@
 package ex2;
 
+import ex1.BoundedBuffer;
+
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Main {
 
-    public static final int N = 10;
 
-    // gerador de números aleatórios
-    static int generate_random_number(int min, int max) {
-        double randomDouble = Math.random();
-        randomDouble = randomDouble * max + min;
-        int randomInt = (int) randomDouble;
-        return randomInt;
-    }
+    public static void main(String[] args) throws InterruptedException {
 
-    private static class Atomic_Integer {
+        BoundedBuffer b = new BoundedBuffer(10);
+        int tc = 20;
+        int tp = 100;
+        int N = 10;
+        int totalOps = 100;
+        int C;
+        int P;
+        int bestC = 1;
+        int bestP = 1;
+        long best_time = 10000;
 
-        private int counter = 0;
-        private Lock l = new ReentrantLock();
+        for(P = 1; P <= 9; P++) {
 
-        public void increment() {
-           l.lock();
-           this.counter++;
-           l.unlock();
-        }
+            C = N - P;
 
-        public int get() {
-           return this.counter;
-        }
+            Thread[] produtores = new Thread[P];
+            Thread[] consumidores = new Thread[C];
 
-    }
-
-    private static class Produtor implements Runnable {
-
-        private BoundedBuffer pbf;
-        private Atomic_Integer inteiros_produzidos;
-
-        public void run() {
-            int r;
-            for(int i = 0; i < 20; i++) {
-                r = generate_random_number(1, 20);
-                try {
-                    pbf.put(r);
-                    inteiros_produzidos.increment();
-                    System.out.println(pbf.print_buffer());
+            int pOps = totalOps / P;
+            int rest = totalOps % P;
+            // criar produtores
+            for(int i = 0; i < P; i++) {
+                if(i < P - 1) {
+                    produtores[i] = new Thread(new newProducer(b, tc, pOps));
                 }
-                catch(Exception e) {
+                else { produtores[i] = new Thread(new newProducer(b, tc, pOps + rest)); }
+            }
+
+            // criar consumidores
+            int cOps = totalOps / C;
+            int cRest = totalOps % C;
+            for(int i = 0; i < C; i++) {
+                if(i < C - 1) {
+                    consumidores[i] = new Thread(new newConsumer(b, tp, cOps));
                 }
-            }
-        }
-
-        public Produtor(BoundedBuffer pbf, Atomic_Integer inteiros_produzidos) {
-            this.pbf = pbf;
-            this.inteiros_produzidos = inteiros_produzidos;
-        }
-
-    }
-
-    private static class Consumidor implements Runnable {
-
-        private BoundedBuffer cbf;
-        private Atomic_Integer inteiros_consumidos;
-
-        public void run() {
-            int r;
-            for(int i = 0; i < 20; i++) {
-                try {
-                    r = cbf.get();
-                    inteiros_consumidos.increment();
-                    System.out.println("Got: " + r);
-                }
-                catch(Exception e) {
-                }
+                else { consumidores[i] = new Thread(new newConsumer(b, tc, cOps + cRest)); }
             }
 
-        }
+            // iniciar o cronómetro
+            long start_time = System.currentTimeMillis() / 1000; // em segundos
 
-        public Consumidor(BoundedBuffer cbf, Atomic_Integer inteiros_consumidos) {
-            this.cbf = cbf;
-            this.inteiros_consumidos = inteiros_consumidos;
-        }
-
-    }
-
-    // cria as threads
-    public static Thread[] create_threads(int produtores, int consumidores, BoundedBuffer bf, Atomic_Integer inteiros_produzidos, Atomic_Integer inteiros_consumidos) {
-        int i = 0;
-        Thread[] r = new Thread[produtores + consumidores];
-        for(; i < produtores; i++) r[i] = new Thread(new Produtor(bf, inteiros_produzidos));
-        for(; i - produtores < consumidores; i++) r[i] = new Thread(new Consumidor(bf, inteiros_consumidos));
-        return r;
-    }
-
-    static long run_threads(Thread[] threads, int n) {
-
-        long start_time = System.nanoTime();
-
-        for(int i = 0; i < n; i++) {
-           threads[i].start();
-        }
-
-        for(int i = 0; i < n; i++) {
-            try {
-               threads[i].join();
+            for(int i = 0; i < P; i++) {
+                produtores[i].start();
             }
-            catch(Exception e) {
+
+            for(int i = 0; i < C; i++) {
+                consumidores[i].start();
             }
-        }
 
-        return System.nanoTime() - start_time;
-    }
-
-    public static void main(String[] args) {
-
-        BoundedBuffer bf = new BoundedBuffer(N);
-        Atomic_Integer inteiros_produzidos = new Atomic_Integer();
-        Atomic_Integer inteiros_consumidos = new Atomic_Integer();
-
-        int bestP = 1, bestC = 1;
-        long best_overall_time = 100000000;
-        long time_took;
-
-        for(int i = 0; i < N; i++) {
-            Thread[] threads = create_threads(i, N - i, bf, inteiros_produzidos, inteiros_consumidos);
-            time_took = run_threads(threads, N);
-            if(i == 0) best_overall_time = time_took;
-            if(time_took < best_overall_time) {
-                best_overall_time = time_took;
-                bestP = i;
-                bestC = N - i;
+            for(int i = 0; i < P; i++) {
+                produtores[i].join();
             }
-        }
 
-        System.out.println("P: " + bestP);
-        System.out.println("C: " + bestC);
+            for(int i = 0; i < C; i++) {
+                consumidores[i].join();
+            }
 
-        System.out.println("Foram produzidos " + inteiros_produzidos.get() + " inteiros.");
-        System.out.println("Foram consumidos " + inteiros_consumidos.get() + " inteiros.");
+            long stop_time = System.currentTimeMillis() / 1000;
+            long try_time = stop_time - start_time;
+            if(try_time < best_time) {
+                best_time = try_time;
+                bestC = C;
+                bestP = P;
+            }
+
+         }
+
+        System.out.println("O melhor número de C é: " + bestC);
+        System.out.println("O melhor número de P é: " + bestP);
+        System.out.println("Demorando: " + best_time + " segundos.");
+
+        // Fazer débito -> número total de operações / tempo
 
     }
 }

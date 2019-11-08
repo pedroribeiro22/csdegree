@@ -1,38 +1,44 @@
 -- Projeção de todas as consultas
-SELECT * FROM Clinica.CONSULTA;
+select * from Clinica.CONSULTA;
 
 use Clinica;
 
 -- Exercício 2
 -- a)
-SELECT nome, data_inicio_servico FROM MEDICO WHERE YEAR(data_inicio_servico) <= 2009;
+select nome, data_inicio_servico from MEDICO where YEAR(data_inicio_servico) <= 2009;
 
 -- b)
-SELECT nome, (SELECT designacao FROM ESPECIALIDADE WHERE id_especialidade = especialidade) FROM MEDICO;
+select nome, (select designacao from ESPECIALIDADE where id_especialidade = especialidade) from MEDICO;
 
-SELECT nome FROM MEDICO
-JOIN ESPECIALIDADE ON ESPECIALIDADE.id_especialidade = MEDICO.especialidade;
+select nome from MEDICO
+join ESPECIALIDADE on ESPECIALIDADE.id_especialidade = MEDICO.especialidade;
 
 -- c)
-SELECT  nome, morada FROM PACIENTE
-JOIN CODIGO-POSTAL ON CODIGO-POSTAL.codigo_postal = PACIENTE.codigo_postal
-WHERE CODIGO-POSTAL.localidade = 'BRAGA'; 
+select  nome, morada from PACIENTE
+join CODIGO_POSTAL on CODIGO_POSTAL.codigo_postal = PACIENTE.codigo_postal
+where CODIGO_POSTAL.localidade = 'BRAGA';
 
 -- d)
-SELECT nome FROM MEDICO
-JOIN ESPECIALIDADE ON ESPECIALIDADE.designacao = MEDICO.especialidade
-WHERE ESPECIALIDADE.designacao = 'Oftalmologia';
+select nome from MEDICO
+join ESPECIALIDADE on ESPECIALIDADE.designacao = MEDICO.especialidade
+where ESPECIALIDADE.designacao = 'Oftalmologia';
 
 -- e)
-SELECT nome, (2019- YEAR(data_nascimento) FROM MEDICO
-JOIN ESPECIALIDADE ON ESPECIALIDADE.designacao = MEDICO.especialidade
-WHERE ESPECIALIDADE.designacao = 'Clínica Geral' AND (2019 - YEAR(MEDICO.data_nascimento) > 40);
+select nome, (2019- year(MEDICO.data_nascimento) from MEDICO
+join ESPECIALIDADE on ESPECIALIDADE.designacao = MEDICO.especialidade
+where ESPECIALIDADE.designacao = 'Clínica Geral' and (2019 - year(MEDICO.data_nascimento) > 40);
 
 -- f) 
-SELECT DISTINCT MEDICO.nome FROM MEDICO AS DOCTOR     -- DISTINCT - Elimina ocorrências repetidas
-JOIN ESPECIALIDADE ON ESPECIALIDADE.designacao = DOCTOR.designacao
-JOIN CONSULTA ON DOCTOR.id_medico = CONSULTA.id_medico
-JOIN PACIENTE ON PACIENTE.id_paciente = CONSULTA.id_paciente
-JOIN CODIGO-POSTAL ON CODIGO-POSTAL.codigo_postal = PACIENTE.codigo_postal
-WHERE CODIGO-POSTAL.localidade = 'BRAGA' AND ESPECIALIDADE.designacao = 'Oftalmologia';
+select distinct MEDICO.nome from MEDICO as DOCTOR     -- DISTINCT - Elimina ocorrências repetidas
+join ESPECIALIDADE on ESPECIALIDADE.designacao = DOCTOR.designacao
+join CONSULTA on DOCTOR.id_medico = CONSULTA.id_medico
+join PACIENTE on PACIENTE.id_paciente = CONSULTA.id_paciente
+join CODIGO_POSTAL on CODIGO_POSTAL.codigo_postal = PACIENTE.codigo_postal
+where CODIGO_POSTAL.localidade = 'BRAGA' and ESPECIALIDADE.designacao = 'Oftalmologia';
+
+-- g)
+select MEDICO.nome, (2019 - year(MEDICO.data_inicio_servico)) from MEDICO
+join CONSULTA on MEDICO.id_medico = CONSULTA.id_medico
+join PACIENTE on PACIENTE.id_paciente = CONSULTA.id_paciente
+where hour(CONSULTA.data_hora) >= 12 && (2019 - year(PACIENTE.data_nascimento) < 20);
 
