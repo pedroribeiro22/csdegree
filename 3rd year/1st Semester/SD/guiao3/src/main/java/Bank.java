@@ -9,8 +9,6 @@ public class Bank {
     private Map<Integer, Account> accounts;
     private ReentrantLock lock;
 
-
-    // Criar um objeto do tipo `Banco`
     public Bank() {
 
         this.accounts = new HashMap<>();
@@ -18,7 +16,6 @@ public class Bank {
 
     }
 
-    // Criar uma `Account` no `Banco`
     public int createAccount(double initialBalance) {
 
         this.lock.lock();
@@ -29,7 +26,6 @@ public class Bank {
 
     }
 
-    // Fechar uma `Account` no `Banco`
     public double closeAccount(int id) throws InvalidAccount {
 
         this.lock.lock();
@@ -55,13 +51,10 @@ public class Bank {
 
     public void transfer(int from, int to, double amount) throws InvalidAccount, NotEnoughFounds {
 
-        // Fazer a marosca que aprendemos na última aula para evitar deadlocks (lockar por ordem)
         int min = Math.min(from ,to);
         int max = Math.max(from, to);
 
         this.lock.lock();
-
-        // Os objetos `Account` servem para que o banco fique locked menos tempo
 
         Account a1 = this.accounts.get(min);
         Account a2 = this.accounts.get(max);

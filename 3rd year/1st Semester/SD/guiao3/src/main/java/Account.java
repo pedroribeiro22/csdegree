@@ -5,7 +5,6 @@ public class Account {
    private double balance;
    public final ReentrantLock lock;
 
-   // Criar uma conta
    public Account(double initialBalance) {
 
       this.balance = initialBalance;
@@ -13,7 +12,6 @@ public class Account {
 
    }
 
-   // Levantar dinheiro
    public void withdraw(double amount) throws NotEnoughFounds {
 
       if(amount > this.balance) throw new NotEnoughFounds(amount);
@@ -21,14 +19,13 @@ public class Account {
 
    }
 
-   // Depositar dinheiro
-  public void deposit(double amount) {
+   public void deposit(double amount) {
 
       this.balance += amount;
 
   }
 
-  public double getBalance() {
+   public double getBalance() {
 
       return this.balance;
 
