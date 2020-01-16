@@ -84,9 +84,11 @@ public class RWLock {
 
        writers = 0;
 
-       // writeWait.signal();
-       readWait.signalAll();
        writeWait.signal();
+       readWait.signalAll();
+       // writeWait.signal();
+
+        // se deixar da maneira comentada o padrão é esquisito
 
         //writeWait.signal();
 
