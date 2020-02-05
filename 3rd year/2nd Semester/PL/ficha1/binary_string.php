@@ -1,6 +1,7 @@
 <?php
 
 $pattern = "/0*1((0*1){2})*0+/";
+$another_pattern = "/(0*0*1)((0*1){2})*0*0*/";
 $text_array = array("10101", "111110", "1110011");
 
 
@@ -12,7 +13,7 @@ foreach ($text_array as $linha) {
          else echo " -> ÍMPAR\n";
     }
 
-    if(preg_match($pattern, $linha)) {
+    if(preg_match($another_pattern, $linha)) {
 
         echo "Match found in: $linha\n";
 
