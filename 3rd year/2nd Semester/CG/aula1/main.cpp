@@ -42,14 +42,14 @@ void changeSize(int w, int h) {
 
 void keyPress(unsigned char key, int x, int y) {
     if(key == 'a') {
-        angle -= 0.1;
-        eyeX -= sin(angle);
-        eyeZ -= cos(angle);
-    }
-    if(key == 'd') {
-        angle += 0.1;
+        angle -= 0.5;
         eyeX += sin(angle);
         eyeZ += cos(angle);
+    }
+    if(key == 'd') {
+        angle += 0.5;
+        eyeX -= sin(angle);
+        eyeZ -= cos(angle);
     }
 }
 
