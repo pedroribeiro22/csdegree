@@ -2,27 +2,18 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+
+float sum = 0;
+int summing = 0;
+
 %}
 
 %%
 
-.*\d.*$ {
+[0-9]+ if(summing) sum += atof(yytext);
 
-    int summing = 0;
-    int total = 0;
-    for(int i = 0; yytext[i] != '\n'; i++) {
-        if(yytext[i] == '=') printf("%d\n", total);
-        if(yytext[i] == '+') {
-            if(!summing) summing = 1;
-            else summing = 0;
-        }    
-        if(summing && isdigit(yytext[i])) total += (((int) yytext[i]) - 48);
-    }
-    printf("%d\n", total);
+\+ summing ? (summing = 0) : (summing = 1);
 
-    // Está a ver um carater de cada vez, não funciona bem para número com
-    // mais de um dígito.
+= printf("CURRENT SUM: %f\n", sum);
 
-}
-
-.+$ ;
+.|\n ; 
