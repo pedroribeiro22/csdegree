@@ -7,13 +7,16 @@ float sum = 0;
 int summing = 0;
 
 %}
-
+%x somar
 %%
+    BEGIN 0;
 
-[0-9]+ if(summing) sum += atof(yytext);
-
-\+ summing ? (summing = 0) : (summing = 1);
-
-= printf("CURRENT SUM: %f\n", sum);
-
-.|\n ; 
+\+ BEGIN somar;
+<somar>[0-9]+ sum += atoi(yytext);
+<somar>\+ BEGIN 0;
+<*>= printf("soma = %d\n", sum);
+<*>.|\n ;
+%%
+int yywrap() {
+    printf("A soma é: %d\n", sum);
+}
