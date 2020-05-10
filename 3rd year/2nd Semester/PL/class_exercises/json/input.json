@@ -1,0 +1,30 @@
+[
+    {
+        "id": "A89234",
+        "nome": "Ana Cristina Almeida",
+        "notas": [
+            {
+                "uc": "Processamento de Linguagens",
+                "nota": 16
+            },
+            {
+                "uc": "Computação Gráfica",
+                "nota": 14
+            }
+        ]
+    },
+    {
+        "id": "A89170",
+        "nome": "Rui Paulo Bastos",
+        "notas": [
+            {
+                "uc": "Processamento de Linguagens",
+                "nota": 12
+            },
+            {
+                "uc": "Computação Gráfica",
+                "nota": 10
+            }
+        ]
+    }
+]
