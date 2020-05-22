@@ -72,7 +72,7 @@ aestrela(Caminhos, SolucaoCaminho) :-
 	seleciona(MelhorCaminho, Caminhos, OutrosCaminhos),
 	expande_aestrela(MelhorCaminho, ExpCaminhos),
 	append(OutrosCaminhos, ExpCaminhos, NovoCaminhos),
-        aestrela(NovoCaminhos, SolucaoCaminho).		
+    aestrela(NovoCaminhos, SolucaoCaminho).		
 
 
 obtem_melhor([Caminho], Caminho) :- !.
