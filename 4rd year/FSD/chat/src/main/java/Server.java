@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -9,42 +6,46 @@ import java.util.List;
 
 public class Server {
 
+    private static final int PORT = 12345;
+
+    private int sessionIdentifier = 0;
+    private ServerSocket server;
+    private List<Socket> clients;
+
     public static void main(String[] args) {
 
-        List<Socket> connectedClients = new ArrayList<Socket>();
+        new Server().launch();
+
+    }
+
+    public void launch() {
+
 
         try {
 
-            // Criação do server na porta dada como argumento
-            ServerSocket s = new ServerSocket(12345);
+            // Create the variables necessary to maintain the servers' functionality
+            this.server = new ServerSocket(this.PORT);
+            // this.server.bind(new InetSocketAddress(this.HOSTNAME, this.PORT));
+            this.clients = new ArrayList<>();
 
-            // Aceitação contínua de conexões
+            // We have to continually accept new connections
             while(true) {
 
-                Socket sock = s.accept();
+                // Accept new client connection
+                Socket socket = this.server.accept();
+                this.clients.add(socket);
 
-                // Adds the new client to the list of connected clients
-                connectedClients.add(sock);
+                System.out.println("Someone has connected. Here's the info: ");
+                System.out.println("Address: " + socket.getLocalAddress() + ", Port: " + socket.getPort());
 
-                BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+                new Thread(new Session(this.sessionIdentifier++, socket, this.clients)).start();
 
-                String message;
-
-                while((message = in.readLine()) != null) {
-
-                    // Sending the received message to every connected  client
-                    // Includes the client that just sent it, we might want to avoid it
-                    for(Socket client : connectedClients) {
-
-                        PrintWriter out = new PrintWriter(client.getOutputStream(), true);
-                        out.println(message);
-
-                    }
-                }
             }
 
         } catch(IOException e) {
+
             e.printStackTrace();
+
         }
     }
 
