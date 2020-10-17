@@ -25,7 +25,7 @@ public class InteractiveClient {
 
             new Thread(new KeyboardReader(out)).start();
 
-            new Thread(new ServerReader(fromServer)).start();
+            new Thread(new ServerReader(fromServer, 0)).start();
 
 
         } catch(IOException e) {

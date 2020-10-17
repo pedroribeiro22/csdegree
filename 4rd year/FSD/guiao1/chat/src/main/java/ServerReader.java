@@ -4,9 +4,11 @@ import java.io.IOException;
 public class ServerReader implements Runnable {
 
     private BufferedReader in;
+    private int delay;
 
-    public ServerReader(final BufferedReader in) {
+    public ServerReader(final BufferedReader in, final int delay) {
         this.in = in;
+        this.delay = delay;
     }
 
     public void run() {
@@ -21,7 +23,11 @@ public class ServerReader implements Runnable {
 
             }
 
-        } catch(IOException e) {
+            if(this.delay != 0) {
+                Thread.sleep(this.delay);
+            }
+
+        } catch(IOException | InterruptedException e) {
 
             e.printStackTrace();
 
