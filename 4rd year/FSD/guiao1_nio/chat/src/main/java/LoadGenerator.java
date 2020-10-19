@@ -33,7 +33,7 @@ public class LoadGenerator implements Runnable {
             System.out.println("I sent this:" +  message);
 
             try {
-                Thread.sleep((long) this.write_delay * 1000);
+                Thread.sleep((long) (this.write_delay * 1000));
             } catch(InterruptedException e) {
                 e.printStackTrace();
             }

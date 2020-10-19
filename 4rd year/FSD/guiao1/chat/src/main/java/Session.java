@@ -17,23 +17,6 @@ public class Session implements Runnable {
         this.connectedClients = connectedClients;
     }
 
-    public void sendMessage(final String message) {
-
-        try {
-
-            PrintWriter out = new PrintWriter(new OutputStreamWriter(this.socket.getOutputStream()), true);
-            out.println(message);
-
-        } catch(IOException e) {
-
-            e.printStackTrace();
-
-        }
-
-    }
-
-
-
     public void run(){
 
         try {
