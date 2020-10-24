@@ -1,0 +1,6 @@
+projectKey=benchmark
+serverUrl=http://localhost:9000
+serverVersion=8.5.0.37579
+dashboardUrl=http://localhost:9000/dashboard?id=benchmark
+ceTaskId=AXVWZAg20E3HfDze0ozS
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AXVWZAg20E3HfDze0ozS
