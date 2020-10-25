@@ -4,6 +4,8 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
 public class Server {
 
@@ -12,6 +14,7 @@ public class Server {
     private int sessionIdentifier = 0;
     private ServerSocketChannel server;
     private List<SocketChannel> clients;
+    private List<BlockingQueue> connections = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -38,13 +41,15 @@ public class Server {
                 // Accept new client connection
                 // TODO: Socket socket = this.server.accept();
                 SocketChannel socket = this.server.accept();
+                BlockingQueue messageQueue = new ArrayBlockingQueue(20);
 
                 this.clients.add(socket);
+                this.connections.add(messageQueue);
 
                 System.out.println("Someone has connected. Here's the info: ");
                 System.out.println("Address: " + socket.getLocalAddress());
 
-                new Thread(new Session(this.sessionIdentifier++, socket, this.clients)).start();
+                new Thread(new Session(this.sessionIdentifier++, socket, this.clients, messageQueue)).start();
 
             }
 
