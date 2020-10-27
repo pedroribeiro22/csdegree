@@ -119,6 +119,21 @@ public class Workload {
 
         }
 
+        // Populate invoices
+        for(int i = 0; i < Workload.invoices; i++) {
+
+            int id = i;
+            int product_id = rand.nextInt(Workload.products);
+            int client_id = rand.nextInt(Workload.clients);
+            String invoiceData = Handy.stringIt(Handy.randomString(1000));
+            insertValueIntoTable(c, "invoice", new ArrayList<>(Arrays.asList(
+                    String.valueOf(id),
+                    String.valueOf(product_id),
+                    String.valueOf(client_id),
+                    invoiceData
+            )));
+        }
+
     }
 
 

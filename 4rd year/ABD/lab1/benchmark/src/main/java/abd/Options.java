@@ -28,5 +28,5 @@ public class Options {
     public boolean populate = true;
 
     @Parameter(names = {"-x","--execute"}, description = "execute the workload")
-    public boolean execute = true;
+    public boolean execute = false;
 }

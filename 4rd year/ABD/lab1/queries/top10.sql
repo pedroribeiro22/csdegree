@@ -1,5 +1,4 @@
-SELECT product.id, COUNT(product.id) AS count
-FROM invoice
-GROUP BY product.id
-ORDER BY count
-LIMIT 10;
+select product_id, count(product_id) as count from invoice
+group by product_id
+order by count desc
+limit 10;
