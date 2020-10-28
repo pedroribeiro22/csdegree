@@ -1,7 +1,8 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class ContactList {
-    public LinkedList<Contact> contacts;
+    private LinkedList<Contact> contacts;
 
     public ContactList() {
         contacts = new LinkedList<>();
@@ -13,7 +14,7 @@ public class ContactList {
 
     public Contact getContactByName(String name) {
         for (Contact c : contacts)
-            if (c.name == name)
+            if (c.getName() == name)
                 return c;
         return null;
     }
