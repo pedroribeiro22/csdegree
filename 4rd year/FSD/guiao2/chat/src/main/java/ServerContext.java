@@ -3,13 +3,16 @@ import java.nio.channels.AsynchronousSocketChannel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FullContext {
+public class ServerContext {
 
+    // Main Server Socket
     private AsynchronousServerSocketChannel server;
+    // List of currently connected clients
     private List<AsynchronousSocketChannel> clients;
 
-    public FullContext(AsynchronousServerSocketChannel server) {
+    public ServerContext(AsynchronousServerSocketChannel server) {
         this.server = server;
+        // When the server starts it has no connected clients so we initialize the ArrayList empty
         this.clients = new ArrayList<>();
     }
 

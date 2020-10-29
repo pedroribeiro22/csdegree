@@ -2,14 +2,15 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 import static java.util.concurrent.Executors.defaultThreadFactory;
 
 public class Server {
+
+    private static Logger log = LogManager.getLogger(Server.class);
 
     private static class Context {
 
@@ -24,7 +25,7 @@ public class Server {
     }
 
     private static final int PORT = 12345;
-    private static FullContext serverContext;
+    private static ServerContext serverContext;
 
 
     public static void main(String[] args) throws Exception {
@@ -82,13 +83,13 @@ public class Server {
 
 
 
-    private static final CompletionHandler<AsynchronousSocketChannel, FullContext> ach =
+    private static final CompletionHandler<AsynchronousSocketChannel, ServerContext> ach =
 
-            new CompletionHandler<AsynchronousSocketChannel, FullContext>() {
+            new CompletionHandler<AsynchronousSocketChannel, ServerContext>() {
 
                 @Override
                 public void completed(AsynchronousSocketChannel sc,
-                                      FullContext fc) {
+                                      ServerContext fc) {
 
                     System.out.println("Accepted!");
                     fc.addClient(sc);
@@ -101,38 +102,41 @@ public class Server {
                 }
 
                 @Override
-                public void failed(Throwable throwable, FullContext o) {
+                public void failed(Throwable throwable, ServerContext o) {
 
                 }
             };
+
 
     public static void readRec(Context c){
         c.sc.read(c.buff, c, read);
     }
 
-    public static void acceptRec(FullContext fc) {
-
-        // ach: the handler. In order not to have to create a new handler for every new client we make it static
+    public static void acceptRec(ServerContext fc) {
         fc.getServer().accept(fc, ach);
-        //sc.accept(sc, ach);
-
     }
 
 
 
     public void launch() throws Exception {
 
-        // Creates the thead pool
+        // Creates the pool of threads that are available for accepting and managing connections
         AsynchronousChannelGroup g = AsynchronousChannelGroup.withFixedThreadPool(1, defaultThreadFactory());
+        // Binds the server to the thread pool
         AsynchronousServerSocketChannel sc = AsynchronousServerSocketChannel.open(g);
         sc.bind(new InetSocketAddress(Server.PORT));
-        serverContext = new FullContext(sc);
 
-        // TODO: Recursive client acceptor
+        // Initalizes the server context
+        serverContext = new ServerContext(sc);
+
+        // Continuosly accpets connections
         acceptRec(serverContext);
 
+        // Sets the maximum amount of time that a thread can wait for a new connection
         g.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
+
         System.out.println("Terminei!");
+
     }
 
 }
