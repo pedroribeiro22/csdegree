@@ -17,9 +17,8 @@ public class Populator {
 
     public void populateAccounts() throws RegisteredAccount, NoSuchAlgorithmException {
         for(int i = 0; i < this.clients_count; i++) {
-            String password = "client" + "1";
             String usernamePassword = "client" + i;
-            this.logInManager.createAccount(usernamePassword, password);
+            this.logInManager.createAccount(usernamePassword, usernamePassword);
         }
     }
 

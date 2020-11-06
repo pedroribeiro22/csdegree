@@ -17,4 +17,8 @@ public class Utilities {
         return ByteBuffer.wrap(input.getBytes(StandardCharsets.UTF_8));
     }
 
+    public static String removeNewLine(String input) {
+        return input.replace("\n", "");
+    }
+
 }

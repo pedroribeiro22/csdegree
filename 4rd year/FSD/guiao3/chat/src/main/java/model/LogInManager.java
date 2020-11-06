@@ -3,6 +3,7 @@ package model;
 import exceptions.IncorrectCredentials;
 import exceptions.NotRegisteredUser;
 import exceptions.RegisteredAccount;
+import utilities.Utilities;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -11,10 +12,10 @@ import java.util.Map;
 
 public class LogInManager {
 
-    private static String hashPassword(String password) throws NoSuchAlgorithmException {
-        MessageDigest digester = MessageDigest.getInstance("SHA-256");
-        digester.update(password.getBytes());
-        return new String(digester.digest());
+    private static String hashPassword(String input) throws NoSuchAlgorithmException {
+       MessageDigest digester = MessageDigest.getInstance("SHA-256");
+       digester.update(input.getBytes());
+       return new String(digester.digest());
     }
 
     private HashMap<String, String> credentials;
@@ -29,21 +30,17 @@ public class LogInManager {
 
     public void createAccount(String username, String password) throws RegisteredAccount, NoSuchAlgorithmException {
         if(!this.credentials.containsKey(username)) {
-            this.credentials.put(username, hashPassword(password));
+            this.credentials.put(username, LogInManager.hashPassword(password));
         } else {
             throw new RegisteredAccount();
         }
     }
 
     public boolean isLoginValid(String username, String password) throws NotRegisteredUser, NoSuchAlgorithmException {
-        boolean r = false;
+        boolean r;
         if(this.credentials.containsKey(username)) {
-            System.out.println("Password: " + password);
-            String hashedPassword = hashPassword(password);
-            String storedHash = this.credentials.get(username);
-            System.out.println("Stored: " + storedHash);
-            System.out.println("Provided: " + hashPassword(password));
-            r = storedHash.equals(hashedPassword);
+            String newLineStripped = Utilities.removeNewLine(password);
+            r = LogInManager.hashPassword(newLineStripped).equals(this.credentials.get(username));
         } else {
             throw new NotRegisteredUser();
         }
@@ -51,11 +48,9 @@ public class LogInManager {
     }
 
     public void editPassword(String username, String currentPassword, String newPassword) throws NotRegisteredUser, IncorrectCredentials, NoSuchAlgorithmException {
-        String hashedPassword = LogInManager.hashPassword(currentPassword);
-        boolean r = isLoginValid(username, hashedPassword);
+        boolean r = isLoginValid(username, LogInManager.hashPassword(currentPassword));
         if(r) {
-            String newHashedPassword = LogInManager.hashPassword(newPassword);
-            this.credentials.put(username, newHashedPassword);
+            this.credentials.put(username, newPassword);
         } else {
             throw new IncorrectCredentials();
         }

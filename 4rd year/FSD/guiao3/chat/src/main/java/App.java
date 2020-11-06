@@ -37,19 +37,20 @@ public class App {
                 boolean loggedIn;
                 if(credentials.length == 2) {
                     try {
-                        sc.write(Utilities.stringToByteBuffer("Credentials -> username: " + credentials[0] + ", password: " + credentials[1]).duplicate());
+                        sc.write(Utilities.stringToByteBuffer("Credentials -> username: " + credentials[0] + ", password: " + credentials[1] + "\n").duplicate());
                         loggedIn = context.getLogInManager().isLoginValid(credentials[0], credentials[1]);
                     } catch (Exception e) {
                         loggedIn = false;
                     }
                 } else {
-                    loggedIn = true;
+                    loggedIn = false;
                 }
                 if(!loggedIn) {
                     sc.write(Utilities.stringToByteBuffer("The login was not successful, please try again!\n"));
                     buff.clear();
                     login(buff, sc, context);
                 } else {
+                    sc.write(Utilities.stringToByteBuffer("The login was sucessful. You're logged in as \"" + credentials[0] + "\"\n").duplicate());
                     buff.clear();
                     context.addConnectedClient(sc);
                     read(buff, sc, context);
