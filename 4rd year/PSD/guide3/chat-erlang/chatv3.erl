@@ -1,17 +1,12 @@
 -module(chatv3).
--import(login_manager, [create_account/2, close_account/2, login/2, logout/1]).
 -export([start_server/1]).
 
 start_server(Port) ->
   {ok, LSock} = gen_tcp:listen(Port, [binary, {active, once}, {packet, line},
                                       {reuseaddr, true}]),
   Room = spawn(fun()-> room([]) end),
-  Rooms = spawn(fun() -> #{"general" => Room} end),
   spawn(fun() -> acceptor(LSock, Room) end),
   ok.
-
-authenticate(LSock, Username, Password) ->
-
 
 acceptor(LSock, Room) ->
   {ok, Sock} = gen_tcp:accept(LSock),
