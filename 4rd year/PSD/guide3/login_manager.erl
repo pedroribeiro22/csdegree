@@ -9,10 +9,7 @@
     logout/1,
     online/0]).
 
-start() -> 
-    LoginManagerPid = spawn(fun() -> loop(#{"client1" => "client1"}) end),
-    register(?MODULE, LoginManagerPid),
-    LoginManagerPid.
+start() -> register(?MODULE, spawn(fun() -> loop(#{}) end)).
 
 % Abstract implementation of remote procedure call to the ?MODULE process that
 % requires *Username* and *Password* authentication. If the specific operation
