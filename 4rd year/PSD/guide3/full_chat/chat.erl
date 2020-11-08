@@ -7,7 +7,7 @@
 -import(user, [loop/3]).
 
 start_server(Port) ->
-  {ok, ListenningSocket} = gen_tcp:listen(Port, [binary, {active, once}, {packet, line}, {reuseaddr, true}]),
+  {ok, ListenningSocket} = gen_tcp:listen(Port, [binary, {active, true}, {packet, line}, {reuseaddr, true}]),
   {RoomManagerPid, GeneralRoomPid} = room_manager:start(), 
   LogInManagerPid = login_manager:start(),
   spawn(fun() -> connection_establisher(ListenningSocket, RoomManagerPid, LogInManagerPid, GeneralRoomPid) end),
