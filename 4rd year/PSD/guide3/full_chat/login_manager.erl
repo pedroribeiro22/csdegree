@@ -10,7 +10,7 @@
     online/0]).
 
 start() -> 
-    LoginManagerPid = spawn(fun() -> loop(#{"client1" => "client1"}) end),
+    LoginManagerPid = spawn(fun() -> loop(#{"client1" => {"client1", 0}}) end),
     register(?MODULE, LoginManagerPid),
     LoginManagerPid.
 
