@@ -1,5 +1,7 @@
 package abd;
 
+import com.sun.corba.se.spi.orbutil.threadpool.Work;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,6 +38,7 @@ public class Workload {
     private static final Map<Integer, Product> products_map = Workload.generateProducts((int) Math.pow(2, Workload.n));
     private final Random rand;
     private final Connection c;
+    private static int curr_order = 0;
 
     private static List<String> createSuppliers(int n) {
         List<String> suppliers = new ArrayList<>();
@@ -222,6 +225,91 @@ public class Workload {
                     String.valueOf(items)
             )));
         }
+
+    }
+
+    public static void sell_product(Random rand, Connection c) {
+
+        // Creates a new invoice
+        int invoiceline_id = rand.nextInt(Workload.invoiceLines);
+        int invoice_id = rand.nextInt(Workload.invoices);
+        int product_id = rand.nextInt(Workload.products);
+        int client_id = rand.nextInt(Workload.clients);
+        int product_stock = 0;
+        // Update product entry in the "product" table
+        try {
+            Statement s = c.createStatement();
+            StringBuilder query = new StringBuilder("SELECT product.stock FROM product WHERE product.id = " + product_id + ";");
+            ResultSet rs = s.executeQuery(query.toString());
+            product_stock = rs.getInt("stock");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if(product_stock > 0) {
+            product_stock--;
+        }
+        try {
+            Statement s = c.createStatement();
+            StringBuilder update = new StringBuilder("UPDATE product SET product.stock = " + product_stock + " WHERE product.id = " + product_id + ";");
+            s.executeUpdate(update.toString());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        // Add entry to "invoice" table
+        insertValueIntoTable(c, "invoice", new ArrayList<>(Arrays.asList(
+                String.valueOf(invoice_id),
+                String.valueOf(client_id)
+        )));
+        // Add entry to "invoiceLine" table
+        insertValueIntoTable(c, "invoiceLine", new ArrayList<>(Arrays.asList(
+                String.valueOf(invoiceline_id),
+                String.valueOf(invoice_id),
+                String.valueOf(product_id)
+        )));
+
+
+    }
+
+    public static void top10products(Connection c) {
+        try {
+            Statement s = c.createStatement();
+            StringBuilder query = new StringBuilder("SELECT invoiceLine.product_id, COUNT(invoiceLine.product_id) AS count FROM invoiceLine\n");
+            query.append("\tGROUP BY invoice.product_id\n");
+            query.append("\tORDER BY count desc\n");
+            query.append("\tLIMIT 10;");
+            ResultSet rs = s.executeQuery(query.toString());
+        } catch (SQLException e)  {
+            e.printStackTrace();
+        }
+    }
+
+    public static void order(Random rand, Connection c) {
+        int product_id = rand.nextInt(Workload.products);
+        int product_stock = 0;
+        int product_max = 0;
+        try {
+            Statement s = c.createStatement();
+            StringBuilder query = new StringBuilder("SELECT product.stock, product.max FROM product WHERE product.id = " + product_id + ";");
+            ResultSet rs = s.executeQuery(query.toString());
+            product_stock = rs.getInt("stock");
+            product_max = rs.getInt("max");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        int to_order = product_max - product_stock;
+        int no_suppliers = Workload.suppliers.size();
+        int supplier_no = rand.nextInt(no_suppliers);
+        String supplier = Workload.suppliers.get(supplier_no);
+        int order_id = Workload.curr_order++;
+        insertValueIntoTable(c, "orders", new ArrayList<>(Arrays.asList(
+                String.valueOf(order_id),
+                String.valueOf(product_id),
+                supplier,
+                String.valueOf(to_order)
+        )));
+    }
+
+    public static void delivery(String supplier, Connection c) {
 
     }
 

@@ -1,47 +1,55 @@
-package zeromq.guiao5;
+package zeromq.guiao5.exercicio2;
 
 import org.zeromq.SocketType;
 import org.zeromq.ZContext;
 import org.zeromq.ZMQ;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
+import java.util.*;
 
 public class Client {
 
-    public static void main(String[] args) {
+    static List<Integer> pubNodes = new ArrayList(Arrays.asList(12345, 12346, 12347));
+    static List<Integer> subNodes = new ArrayList(Arrays.asList(12348, 12349, 12350));
+
+    private static void main(String[] args) {
 
         String current_room = "general";
 
         try(
                 ZContext context = new ZContext();
-                ZMQ.Socket sub_socket = context.createSocket(SocketType.SUB);
-                ZMQ.Socket push_socket = context.createSocket(SocketType.PUSH);
+                ZMQ.Socket subSocket = context.createSocket(SocketType.SUB);
+                ZMQ.Socket pubSocket = context.createSocket(SocketType.PUB);
         ) {
 
-            sub_socket.connect("tcp://localhost:" + 12345);
-            push_socket.connect("tcp://localhost:" + 12346);
+            // We need a random generator
+            Random rand = new Random(System.currentTimeMillis());
+            int toSubscribe = rand.nextInt(Client.subNodes.size());
+            int toPublish = rand.nextInt(Client.pubNodes.size());
 
-            sub_socket.subscribe(current_room);
+            subSocket.connect("tcp://localhost:" + Client.subNodes.get(toSubscribe));
+            pubSocket.connect("tcp://localhost:" + Client.pubNodes.get(toPublish));
 
-            new Thread(new ClientReader(sub_socket)).start();
+            subSocket.subscribe(current_room);
+
+            new Thread(new ClientReader(subSocket)).start();
 
             while(true) {
                 Scanner in = new Scanner(System.in);
                 String msg = in.nextLine();
                 String[] splitted = msg.split(" ");
                 if(splitted.length == 2) {
-                    // Possivelmente mudar de sala
+                    // mudar de sala
                     if(splitted[0].equals("\\room")) {
                         String new_room = splitted[1];
-                        sub_socket.unsubscribe(current_room);
+                        subSocket.unsubscribe(current_room);
                         current_room = new_room;
-                        sub_socket.subscribe(current_room);
+                        subSocket.subscribe(current_room);
                     }
                 } else {
                     // Mensagem normal
                     byte[] new_msg = (current_room + " " + splitted[0]).getBytes();
-                    push_socket.send(new_msg);
+                    pubSocket.send(new_msg);
                 }
             }
         }

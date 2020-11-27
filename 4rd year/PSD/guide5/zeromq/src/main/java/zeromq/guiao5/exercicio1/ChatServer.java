@@ -1,4 +1,4 @@
-package zeromq.guiao5;
+package zeromq.guiao5.exercicio1;
 
 import org.zeromq.SocketType;
 import org.zeromq.ZContext;
