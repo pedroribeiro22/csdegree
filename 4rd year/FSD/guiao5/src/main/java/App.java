@@ -10,7 +10,7 @@ public class App {
         List<Integer> peers_ports = new ArrayList<>(Arrays.asList(12345, 12346, 12347));
 
         for(int i = 0; i < 3; i++) {
-            new Thread(new Peer(total_peers, 12345 + i, peers_ports, 3)).start();
+            new Thread(new Peer(i, 12345 + i, peers_ports, total_peers)).start();
         }
 
     }

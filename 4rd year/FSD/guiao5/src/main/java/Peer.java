@@ -4,6 +4,7 @@ import io.atomix.utils.net.Address;
 import org.apache.commons.lang3.SerializationUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -17,13 +18,10 @@ public class Peer implements Runnable {
     private List<Message> pending;
 
     public Peer(final int id, final int port, final List<Integer> peers, final int total_peers) {
-        this.id = 0;
+        this.id = id;
         this.port = port;
         this.peers = peers;
-        this.clocks = new ArrayList<>();
-        for(int i = 0; i < total_peers; i++) {
-            this.clocks.add(0);
-        }
+        this.clocks = new ArrayList<>(Arrays.asList(0, 0, 0));
         this.pending = new ArrayList<>();
     }
 
@@ -76,8 +74,7 @@ public class Peer implements Runnable {
     public void retry() {
 
         for(Message m : this.pending) {
-            boolean r = check_message(m);
-            if(r) {
+            if(check_message(m)) {
                 update_clock(m);
                 System.out.println("Message received: \"" + m.getMessage() + "\"");
                 this.pending.remove(m);
