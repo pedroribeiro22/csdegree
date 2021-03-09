@@ -5,7 +5,7 @@ public class BankNaive implements Bank {
     private double balance;
 
     public BankNaive() {
-        this.balance = 0;
+        this.balance = 10000;
     }
 
     public double balance() {
