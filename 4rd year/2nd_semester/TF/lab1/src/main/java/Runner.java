@@ -1,20 +1,32 @@
 import java.util.Random;
 
+import Stubs.AsyncStub;
+
 public class Runner {
     
     public static void main(String[] args) throws Exception {
 
-        MessageSender ms = new MessageSender(args, args.length, 1500);
+        AsyncStub as = new AsyncStub(1500, args);
 
-        for(int i = 0; i < 1500; i++) {
-            String operation = Runner.getRandomOperation();
-            if(operation == "balance") {
-                ms.balance(i);
+        runOperations(as, 1500);
+        
+    }
+
+    private static void runOperations(AsyncStub as, int number) {
+        System.out.println(number);
+        if(number == 0) {
+            double balance = ms.balance(number);
+            System.out.println("Final Balance: " + balance);
+        } else {
+            Random rand = new Random();
+            String operation = getRandomOperation();
+            int accountMovement = (int) (Math.round(50 * (-2.0 + rand.nextFloat() * 4.0)));
+            if(operation == "movement") {
+                ms.movement(number, accountMovement);
             } else {
-                Random rand = new Random();
-                double amount =  (Math.round(50 * (-2.0 + rand.nextDouble() * 4.0)));
-                ms.movement(i, amount);
+                ms.balance(number);
             }
+            runOperations(as, number - 1);
         }
     }
 

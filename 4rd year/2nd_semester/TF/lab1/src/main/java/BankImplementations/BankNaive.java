@@ -2,20 +2,16 @@ package BankImplementations;
 
 public class BankNaive implements Bank {
 
-    private double balance;
+    private int[] balance = { 10000 };
 
-    public BankNaive() {
-        this.balance = 10000;
+    public int balance(int account_id) {
+        return this.balance[account_id];
     }
 
-    public double balance() {
-        return this.balance;
-    }
-
-    public boolean movement(double amount) {
-        double projected_balance = this.balance + amount;
+    public boolean movement(int account_id, int amount) {
+        int projected_balance = this.balance[account_id] + amount;
         if (projected_balance < 0) return false;
-        this.balance += amount;
+        this.balance[account_id] += amount;
         return true;
     }
 

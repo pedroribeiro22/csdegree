@@ -1,0 +1,2 @@
+#!/bin/bash
+mvn clean compile exec:java -Dexec.mainClass="Server" -Dexec.args=$1

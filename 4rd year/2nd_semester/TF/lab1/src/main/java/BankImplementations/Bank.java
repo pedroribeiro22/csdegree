@@ -2,7 +2,7 @@ package BankImplementations;
 
 public interface Bank {
 
-    public double balance();
+    public int balance(int account_id);
 
-    public boolean movement(double amount);
+    public boolean movement(int account_id, int amount);
 }
