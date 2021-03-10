@@ -4,7 +4,6 @@ import io.atomix.cluster.messaging.MessagingConfig;
 import io.atomix.cluster.messaging.impl.NettyMessagingService;
 import io.atomix.utils.net.Address;
 
-import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -25,7 +24,7 @@ public class Server {
             String requestIdentifier = new String(content, StandardCharsets.UTF_8).split(" ")[0];
             int balance = banco.balance(account_id);
             System.out.println(requestIdentifier + " requested a balance check");
-            ms.sendAsync(address, requestIdentifier + " balance_response", BigInteger.valueOf(balance).toByteArray());
+            ms.sendAsync(address, requestIdentifier + " balance_response", ("" + balance).getBytes());
         }, es);
 
         ms.registerHandler("movement", (address, content) -> {

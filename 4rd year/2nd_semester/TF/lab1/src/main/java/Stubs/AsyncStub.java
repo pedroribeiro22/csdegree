@@ -1,5 +1,6 @@
 package Stubs;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executors;
@@ -18,6 +19,7 @@ public class AsyncStub {
 
     public AsyncStub(int port, String[] destinations) {
         this.port = port;
+        this.destinations = new ArrayList<>();
         for(int i = 0; i < destinations.length; i++) {
             Integer destination = Integer.parseInt(destinations[i]);
             this.destinations.add(destination);
