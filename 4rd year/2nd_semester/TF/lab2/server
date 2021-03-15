@@ -1,0 +1,7 @@
+#!/bin/bash
+
+mvn clean compile exec:java -Dexec.mainClass="tf.Server" -Dexec.args="$1 $2" 
+
+# mvn clean compile exec:java -Dexec.mainClass="tf.Server" -Dexec.args="4803 alfa" 
+# mvn clean compile exec:java -Dexec.mainClass="tf.Server" -Dexec.args="4804 bravo"
+# mvn clean compile exec:java -Dexec.mainClass="tf.Server" -Dexec.args="4805 charlie"
