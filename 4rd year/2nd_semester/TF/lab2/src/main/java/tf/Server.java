@@ -3,7 +3,10 @@ package tf;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
-import java.util.Random;
+import java.util.Timer;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import spread.BasicMessageListener;
 import spread.SpreadConnection;
@@ -50,6 +53,12 @@ public class Server {
         });
         SpreadGroup group = new SpreadGroup();
         group.join(conn, "lab2");
+
+        ScheduledExecutorService es = Executors.newScheduledThreadPool(1);
+        es.scheduleAtFixedRate(() -> {
+           System.out.println("Current Balance: " + bank.balance(0));
+        }, 0, 2, TimeUnit.SECONDS);
+
         while(true);
     }
 

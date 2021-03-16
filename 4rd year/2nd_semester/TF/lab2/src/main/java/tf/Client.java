@@ -14,7 +14,7 @@ import spread.SpreadMessage;
 
 public class Client {
    
-    private static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
        Random rand = new Random();
        final Map<Integer, Boolean> answeredRequests = new HashMap<Integer, Boolean>();
        int port = Integer.parseInt(args[0]);
