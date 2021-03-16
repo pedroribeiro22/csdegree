@@ -61,6 +61,7 @@ def normalize_results(results):
 
 
 def plot_data(results):
+    new_results = sorted(results.items(), key=lambda kv: kv[1], reverse=True)
     plt.plot(results.keys(), results.values())
     plt.xlabel("Número de nodos do grafo")
     plt.ylabel("Número de arestas adicionadas até ser conectado (em média)")
