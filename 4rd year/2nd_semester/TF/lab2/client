@@ -1,0 +1,3 @@
+#!/bin/bash
+
+mvn clean compile exec:java -Dexec.mainClass="tf.Client" -Dexec.args="$1 $2"
