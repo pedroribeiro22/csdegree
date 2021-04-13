@@ -4,8 +4,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 
-threshold = 1000
-
 
 class Edge:
 
@@ -55,24 +53,27 @@ def generate_graph_and_weights(node_count):
     return GraphAndWeights(graph, node_weights)
 
 
-def generate_weighted_random_edge(full_graph, new_node):
-    full_graph.add_node(new_node)
+def generate_weighted_random_edge(full_graph):
+    origin_node = random.sample(list(full_graph.node_weights.keys()), 1)[0]
     chosen_node = random.choices(list(full_graph.node_weights.keys()), list(
         full_graph.node_weights.values()), k=1)[0]
-    e = Edge(new_node, int(chosen_node))
+    e = Edge(int(origin_node), int(chosen_node))
     return e
 
 
 def run_task(starting_nodes):
     graph = generate_graph_and_weights(starting_nodes)
     iterations = 0
-    while (not nx.is_connected(graph.get_graph()) and iterations < threshold):
-        new_edge = generate_weighted_random_edge(
-            graph, iterations + starting_nodes + 1)
+    while not nx.is_connected(graph.get_graph()):
+        new_edge = generate_weighted_random_edge(graph)
         (es, ee) = new_edge.toTuple()
         graph.add_edge(es, ee)
         iterations = iterations + 1
-    return iterations, graph.get_node_weights()
+    results = graph.get_node_weights()
+    sorted_results = sorted(
+        results.items(), key=lambda kv: kv[1], reverse=True)
+    sorted_dic = dict(sorted_results)
+    return iterations, sorted_dic
 
 
 def run_study(runs, starting_nodes_range):
@@ -104,9 +105,9 @@ def plot_node_weights_graph(result, output_file):
     xx = []
     yy = []
     for key in result:
-        xx.append(int(key))
+        xx.append(key)
         yy.append(result[key])
-    plt.bar(xx, yy, color='blue', width=0.4)
+    plt.bar(xx[:24], yy[:24], color='blue', width=0.4)
     plt.xlabel("Identificador do nodo")
     plt.ylabel("Peso do nodo")
     plt.title("Peso dos nodos depois de o grafo ter uma componente conectada")
