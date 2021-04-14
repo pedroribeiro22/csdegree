@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" href="favicon.ico" />
+    <title>Template</title>
+    <link rel="stylesheet" type="text/css" href="style/reset.css" />
+    <link rel="stylesheet" type="text/css" href="style/style.css" />
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <header>App name</header>
+    <nav>
+      <p>User name</p>
+      <div>
+        <a class="nav_item" href="">All Games</a>
+        <a class="nav_item" href="">My Games</a>
+        <a class="nav_item" href="">Add Games</a>
+      </div>
+    </nav>
+    <div id="central_div">
+      <main>
+        <table>
+          <thead>
+            <tr>
+              <th>Games</th>
+              <th>Year</th>
+              <th>Platform</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Game 1</td>
+              <td>1992</td>
+              <td>Megadrive</td>
+            </tr>
+            <tr>
+              <td>Game 2</td>
+              <td>2017</td>
+              <td>PC</td>
+            </tr>
+          </tbody>
+        </table>
+		<div id="no_purpose_buttons">
+			<a id="no_purpose_buttons_items" href="">1</a>
+			<a id="no_purpose_buttons_items" href="">2</a>
+			<a id="no_purpose_buttons_items" href="">3</a>
+		</div>
+      </main>
+      <aside>
+        <h3 style="margin: 0 0 10px 5px;">Filter</h3>
+        <form action="">
+          <select name="year" style="width: 90%; margin: 5px;">
+            <option disable selected>Year</option>
+            <option>1901</option>
+            <option>1902</option>
+            <option>1903</option>
+            <option>1904</option>
+          </select>
+          <select name="platform" style="width: 90%; margin: 5px;">
+            <option disable selected>Platform</option>
+            <option>MegaDrive</option>
+            <option>NES</option>
+            <option>SNES</option>
+            <option>PlayStation 1</option>
+          </select>
+        </form>
+      </aside>
+    </div>
+    <footer>
+      <p>Footer information ©</p>
+    </footer>
+  </body>
+  <script src="script/script.js"></script>
+</html>
