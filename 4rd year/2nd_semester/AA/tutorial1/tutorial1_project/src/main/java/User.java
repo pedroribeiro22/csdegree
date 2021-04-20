@@ -7,10 +7,13 @@
  * Modifying its content may cause the program not work, or your work may lost.
  */
 
+import javax.persistence.Entity;
+
 /**
  * Licensee: 
  * License Type: Evaluation
  */
+@Entity
 public class User {
 	public User() {
 	}
