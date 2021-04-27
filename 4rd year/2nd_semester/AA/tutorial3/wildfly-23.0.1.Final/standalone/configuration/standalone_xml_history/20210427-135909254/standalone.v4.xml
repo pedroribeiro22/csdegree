@@ -544,8 +544,8 @@
         </outbound-socket-binding>
     </socket-binding-group>
     <deployments>
-        <deployment name="GMSBaseIJ_war_exploded" runtime-name="GMSBaseIJ_war_exploded.war">
-            <fs-exploded path="/home/pedro/Code/csdegree/4rd year/2nd_semester/SI/ficha6/GMSBaseIJ/out/artifacts/GMSBaseIJ_war_exploded"/>
+        <deployment name="tutorial4_project-1.0-SNAPSHOT" runtime-name="tutorial4_project-1.0-SNAPSHOT.war" enabled="false">
+            <fs-exploded path="/home/pedro/Code/csdegree/4rd year/2nd_semester/AA/tutorial4/tutorial4_project/target/tutorial4_project-1.0-SNAPSHOT"/>
         </deployment>
     </deployments>
 </server>
