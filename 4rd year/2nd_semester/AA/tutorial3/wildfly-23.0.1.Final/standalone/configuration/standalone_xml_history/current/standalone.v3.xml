@@ -544,8 +544,8 @@
         </outbound-socket-binding>
     </socket-binding-group>
     <deployments>
-        <deployment name="GMSWeb-1.0-SNAPSHOT.war" runtime-name="GMSWeb-1.0-SNAPSHOT.war">
-            <fs-exploded path="/home/pedro/Code/csdegree/4rd year/2nd_semester/AA/tutorial3/GMSWeb/target/GMSWeb-1.0-SNAPSHOT.war"/>
+        <deployment name="tutorial4_project-1.0-SNAPSHOT" runtime-name="tutorial4_project-1.0-SNAPSHOT.war">
+            <fs-exploded path="/home/pedro/Code/csdegree/4rd year/2nd_semester/AA/tutorial4/tutorial4_project/target/tutorial4_project-1.0-SNAPSHOT"/>
         </deployment>
     </deployments>
 </server>
