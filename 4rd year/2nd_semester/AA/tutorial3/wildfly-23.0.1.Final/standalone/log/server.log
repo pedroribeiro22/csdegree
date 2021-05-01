@@ -8834,3 +8834,21 @@ Caused by: javax.el.PropertyNotWritableException
 2021-04-27 17:46:59,520 INFO  [stdout] (default task-1) [id: 1name: Tetris, id: 2name: GTA V, id: 3name: Assetto Corsa, id: 4name: Fallout 4, id: 5name: Breath of The Wild, id: 6name: Rocket League, id: 7name: F1 2018, id: 8name: F1 2020, id: 9name: F1 2021, id: 10name: CS:GO, id: 11name: NBA 2K21]
 2021-04-27 17:47:00,104 INFO  [stdout] (default task-1) Testing...
 2021-04-27 17:47:00,104 INFO  [stdout] (default task-1) [id: 1name: Tetris, id: 2name: GTA V, id: 3name: Assetto Corsa, id: 4name: Fallout 4, id: 5name: Breath of The Wild, id: 6name: Rocket League, id: 7name: F1 2018, id: 8name: F1 2020, id: 9name: F1 2021, id: 10name: CS:GO, id: 11name: NBA 2K21]
+2021-04-27 17:49:53,341 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 3) WFLYUT0022: Unregistered web context: '/GMSBaseIJ_war_exploded' from server 'default-server'
+2021-04-27 17:49:53,378 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-6) WFLYSRV0028: Stopped deployment GMSBaseIJ_war_exploded (runtime-name: GMSBaseIJ_war_exploded.war) in 38ms
+2021-04-27 17:49:53,386 INFO  [org.jboss.as.server] (management-handler-thread - 1) WFLYSRV0009: Undeployed "GMSBaseIJ_war_exploded" (runtime-name: "GMSBaseIJ_war_exploded.war")
+2021-04-27 17:49:53,411 INFO  [org.jboss.as.server] (management-handler-thread - 1) WFLYSRV0272: Suspending server
+2021-04-27 17:49:53,413 INFO  [org.jboss.as.ejb3] (management-handler-thread - 1) WFLYEJB0493: Jakarta Enterprise Beans subsystem suspension complete
+2021-04-27 17:49:53,414 INFO  [org.jboss.as.server] (Management Triggered Shutdown) WFLYSRV0241: Shutting down in response to management operation 'shutdown'
+2021-04-27 17:49:53,416 INFO  [org.jboss.as.connector.subsystems.datasources] (MSC service thread 1-2) WFLYJCA0010: Unbound data source [java:jboss/datasources/ExampleDS]
+2021-04-27 17:49:53,418 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-6) WFLYUT0019: Host default-host stopping
+2021-04-27 17:49:53,419 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-7) WFLYUT0008: Undertow HTTPS listener https suspending
+2021-04-27 17:49:53,420 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-7) WFLYUT0007: Undertow HTTPS listener https stopped, was bound to 127.0.0.1:8443
+2021-04-27 17:49:53,426 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-8) WFLYJCA0019: Stopped Driver service with driver-name = h2
+2021-04-27 17:49:53,426 INFO  [org.jboss.as.mail.extension] (MSC service thread 1-2) WFLYMAIL0002: Unbound mail session [java:jboss/mail/Default]
+2021-04-27 17:49:53,430 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-7) WFLYUT0008: Undertow HTTP listener default suspending
+2021-04-27 17:49:53,430 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-7) WFLYUT0007: Undertow HTTP listener default stopped, was bound to 127.0.0.1:8080
+2021-04-27 17:49:53,431 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-5) WFLYUT0004: Undertow 2.2.5.Final stopping
+2021-04-27 17:49:53,465 INFO  [org.jboss.as.clustering.infinispan] (ServerService Thread Pool -- 3) WFLYCLINF0003: Stopped http-remoting-connector cache from ejb container
+2021-04-27 17:49:53,466 INFO  [org.infinispan.manager.DefaultCacheManager] (ServerService Thread Pool -- 3) Stopping cache manager null on null
+2021-04-27 17:49:53,470 INFO  [org.jboss.as] (MSC service thread 1-4) WFLYSRV0050: WildFly Full 23.0.1.Final (WildFly Core 15.0.1.Final) stopped in 48ms

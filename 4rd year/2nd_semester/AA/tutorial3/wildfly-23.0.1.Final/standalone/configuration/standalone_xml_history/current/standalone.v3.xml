@@ -543,4 +543,9 @@
             <remote-destination host="${jboss.mail.server.host:localhost}" port="${jboss.mail.server.port:25}"/>
         </outbound-socket-binding>
     </socket-binding-group>
+    <deployments>
+        <deployment name="GMSBaseIJ_war_exploded" runtime-name="GMSBaseIJ_war_exploded.war">
+            <fs-exploded path="/home/pedro/Code/csdegree/4rd year/2nd_semester/SI/ficha6/GMSBaseIJ/out/artifacts/GMSBaseIJ_war_exploded"/>
+        </deployment>
+    </deployments>
 </server>
