@@ -1,0 +1,8 @@
+#!/bin/bash
+
+cd web_server
+
+docker build --tag=lb_web_server .
+docker run -dit --name=lb_web_server -p 8080:80 lb_web_server
+
+echo "You can access the server at localhost:8080"

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+cd servlets/servlet1
+
+docker build --tag=servlet1-lb .
+docker run -d --name=servlet1-lb -p 8081:8080 servlet1-lb 
+
+cd ../servlet2
+
+docker build --tag=servlet2-lb .
+docker run -d --name=servlet2-lb -p 8082:8080 servlet2-lb
+
+echo "The application servers have been deployed!"

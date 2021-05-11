@@ -543,4 +543,9 @@
             <remote-destination host="${jboss.mail.server.host:localhost}" port="${jboss.mail.server.port:25}"/>
         </outbound-socket-binding>
     </socket-binding-group>
+    <deployments>
+        <deployment name="servlet2-1.0-SNAPSHOT.war" runtime-name="servlet2-1.0-SNAPSHOT.war">
+            <fs-exploded path="/home/pedro/Code/csdegree/4rd year/2nd_semester/AA/load_balancing/servlet2/target/servlet2-1.0-SNAPSHOT.war"/>
+        </deployment>
+    </deployments>
 </server>
