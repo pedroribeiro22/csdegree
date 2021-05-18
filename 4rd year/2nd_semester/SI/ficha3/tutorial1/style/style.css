@@ -1,0 +1,50 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Helvetica Neue, Verdana, sans-serif;
+}
+
+header {
+  background-color: red;
+  font-size: 32px;
+  margin: 20px;
+}
+
+nav {
+  background-color: lightgreen;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 5px 10px 5px;
+  padding: 10px;
+}
+
+aside {
+  background-color: lightyellow;
+  float: right;
+  width: 20%;
+  height: 10em;
+}
+
+main {
+  background-color: lightblue;
+  width: 80%;
+  font-size: 18px;
+}
+
+th,
+td,
+tr > main {
+  border: 1px solid black;
+  padding: 7px;
+  text-align: left;
+}
+
+footer {
+  background-color: orange;
+  clear: both;
+  font-size: 16px;
+  margin: 5px;
+}
